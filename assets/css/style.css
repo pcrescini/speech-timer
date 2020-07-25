@@ -39,8 +39,16 @@ footer {
 .logo {
     background-image: url("/assets/img/lets-eat-htx-logo-night-mode.png");
     background-color: #333;
-    height: 50px;
+    height: 125px;
     background-position: left;
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+a, a:visited {
+    color: #002d62;
+}
+
+a:hover {
+    color: #eb6e1f
 }
