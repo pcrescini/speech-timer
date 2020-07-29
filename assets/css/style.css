@@ -57,15 +57,12 @@ a.intro-link {
     text-decoration: none;
 }
 
-
-@media screen and (max-wdith: 414px) {
-    .article {
-        width: 51%;
-    }
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .article {
         width: 48%;
+    }
+
+    body {
+        background-color: #ccc;
     }
 }
