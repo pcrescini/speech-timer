@@ -31,7 +31,7 @@ footer {
 }
 
 .article {
-    width: 33%;
+    width: 30%;
     margin: 0 auto;
 }
 
@@ -64,5 +64,15 @@ a.intro-link {
 
     body {
         background-color: #ccc;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .article {
+        width: 100%;
+    }
+
+    body {
+        background-color: #333;
     }
 }
