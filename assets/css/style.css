@@ -8,12 +8,15 @@ body {
 header {
     color: #ccc;
     padding: 35px;
+    display: flex;
 }
 
 main {
     color: #333;
-    margin: 35px;
+    margin: 25px 50px;
+    padding: 25px;
     background-color: #fff;
+    border-radius: 35px;
 }
 
 footer {
@@ -21,21 +24,12 @@ footer {
     margin: 35px;
 }
 
-/* .intro {
-
+.intro {
+    color: #fff;
+    font-size: 36px;
+    text-align: left;
+    transform: translate(-50%, -50%);
 }
-
-.contact {
-
-}
-
-.contact-email {
-
-}
-
-.contact-instagram {
-
-} */
 
 .logo {
     background-image: url("/assets/img/lets-eat-htx-logo.png");
