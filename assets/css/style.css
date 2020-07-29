@@ -6,13 +6,12 @@ body {
 }
 
 header {
-    color: #ccc;
+    color: #fff;
     padding: 35px;
-    display: flex;
 }
 
 main {
-    margin: 25px auto;
+    margin: 0px auto;
     padding: 25px;
     display: flex;
     flex-wrap: wrap;
@@ -25,7 +24,7 @@ footer {
     margin: 35px;
 }
 
-.intro {
+.intro { 
     color: #fff;
     font-size: 36px;
     text-align: left;
@@ -59,4 +58,20 @@ a.intro-link {
 }
 
 
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 3) {
+    .article {
+        width: 51%;
+    }
+}
 
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .article {
+        width: 48%;
+    }
+}
