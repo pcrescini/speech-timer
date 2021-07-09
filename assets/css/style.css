@@ -1,103 +1,109 @@
 body {
-    margin: 0;
-    font-family: 'Montserrat', 'Open Sans', Helvetica, sans-serif;
-    font-size: 1rem;
-    color: #dfdfdf;
-    background-color: #343434;
+  margin: 0;
+  font-family: "Montserrat", "Open Sans", Helvetica, sans-serif;
+  font-size: 1rem;
+  color: #dfdfdf;
+  background-color: #343434;
 }
 
 header {
-    color: #dfdfdf;
-    font-family: 'Roboto', sans-serif;
-    margin: auto;
-    width: 75%;
+  color: #dfdfdf;
+  font-family: "Roboto", sans-serif;
+  margin: auto;
+  width: 75%;
 }
 
 main {
-    margin: auto;
-    display: flex;
-    align-items: center;
-    width: 75%;
-    flex-wrap: wrap;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  width: 75%;
+  flex-wrap: wrap;
 }
 
 footer {
-    color: #fff;
-    margin: 35px;
+  color: #fff;
+  margin: 35px;
 }
 
 header h1 {
-    font-size: 4em;
-    margin-bottom: 0px;
+  font-size: 4em;
+  margin-bottom: 0px;
 }
 
 header h2 {
-    font-size: 2em;
-    margin-top: 0px;
+  font-size: 2em;
+  margin-top: 0px;
 }
 
-.intro { 
-    color: #fff;
-    font-size: 36px;
-    text-align: left;
+.intro {
+  color: #fff;
+  font-size: 36px;
+  text-align: left;
 }
 
 .article {
-    width: 30%;
-    margin: 0 auto;
-    padding: 0 15px;
+  width: 30%;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
 .button {
-    margin: 0 auto;
-    padding: 25px;
-    text-align: center;
-    background-color: #fff;
+  margin: 0 auto;
+  padding: 25px;
+  text-align: center;
+  background-color: #fff;
 }
 .logo {
-    background-image: url("/assets/img/lets-eat-htx-logo.png");
-    height: 150px;
-    width: 150px;
-    background-position: left;
-    background-repeat: no-repeat;
-    background-size: contain;
+  background-image: url("/assets/img/lets-eat-htx-logo.png");
+  height: 150px;
+  width: 150px;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
-a, a:visited {
-    color: #002d62;
+a,
+a:visited {
+  color: #002d62;
 }
 
 a:hover {
-    color: #eb6e1f
+  color: #eb6e1f;
 }
 
 a.intro-link {
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
+}
+
+.callout {
+  text-align: center;
+  font-size: 24rem;
 }
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
-    .article {
-        width: 45%;
-    }
+  .article {
+    width: 45%;
+  }
 
-    body {
-        background-color: #343434;
-    }
+  body {
+    background-color: #343434;
+  }
 }
 
 @media screen and (max-width: 767px) {
-    .article {
-        width: 100%;
-    }
+  .article {
+    width: 100%;
+  }
 
-    .logo {
-        margin: 0 auto;
-        width: 200px;
-        height: 200px;
-    }
+  .logo {
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+  }
 
-    body {
-        background-color: #343434;
-    }
+  body {
+    background-color: #343434;
+  }
 }
