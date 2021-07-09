@@ -79,7 +79,7 @@ a.intro-link {
 
 .callout {
   text-align: center;
-  font-size: 24rem;
+  font-size: 6em;
 }
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
@@ -105,5 +105,9 @@ a.intro-link {
 
   body {
     background-color: #343434;
+  }
+
+  .callout {
+    font-size: 4em;
   }
 }
