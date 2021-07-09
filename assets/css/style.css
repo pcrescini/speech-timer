@@ -54,6 +54,7 @@ header h2 {
   text-align: center;
   background-color: #fff;
 }
+
 .logo {
   background-image: url("/assets/img/lets-eat-htx-logo.png");
   height: 150px;
@@ -78,6 +79,7 @@ a.intro-link {
 }
 
 .callout {
+  margin: 4em auto;
   text-align: center;
   font-size: 6em;
 }
