@@ -104,6 +104,8 @@ aside {
 }
 
 .timer-menu__controls button {
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-size: 1rem;
   display: block;
   width: 100%;
   padding: 1em;
