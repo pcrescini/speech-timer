@@ -1,7 +1,7 @@
 # pcrescini.github.io
 
-This project is all about building a personal website for my future food blog in additional to acting as a portoflio for my front-end web development work.
+This repo contains mini projects that were developed for practice purposes and to keey my front-end web development skills in check
 
-As it currently stands, I plan on mainly using vanilla HTML/CSS/JS for the majority of this project but may include some modules in the future.
+As it currently stands, the majority of these projects are built using HTML, CSS, & vanilla JS.
 
-
+- pcc
