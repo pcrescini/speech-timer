@@ -1,6 +1,6 @@
 body {
-  margin: 0;
-  font-family: "Montserrat", "Open Sans", Helvetica, sans-serif;
+  margin: 5em;
+  font-family: "Open Sans", Helvetica, sans-serif;
   font-size: 1rem;
   color: #dfdfdf;
   background-color: #343434;
@@ -8,16 +8,13 @@ body {
 
 header {
   color: #dfdfdf;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin: auto;
-  width: 75%;
 }
 
 main {
   margin: auto;
   display: flex;
-  align-items: center;
-  width: 75%;
   flex-wrap: wrap;
 }
 
@@ -27,12 +24,10 @@ footer {
 }
 
 header h1 {
-  font-size: 4em;
   margin-bottom: 0px;
 }
 
 header h2 {
-  font-size: 2em;
   margin-top: 0px;
 }
 
@@ -82,6 +77,17 @@ a.intro-link {
   margin: 4em auto;
   text-align: center;
   font-size: 6em;
+}
+
+.contact-social {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.contact-social a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 22px;
 }
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {

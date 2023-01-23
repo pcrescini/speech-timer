@@ -1,0 +1,165 @@
+body {
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-size: 1rem;
+  color: #F1FFFA;
+  background-color: #252422;
+}
+
+button {
+  transition: all 0.3s ease-in-out;
+}
+
+header {
+  color: #F1FFFA;
+  font-family: "Open Sans", sans-serif;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header h1 {
+  font-size: 3em;
+  font-weight: 700;
+  margin-bottom: 1em;
+}
+
+main {
+  position: absolute;
+  top: 150px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: background-color 0.3s linear;
+}
+
+aside {
+  width: 300px;
+  margin: 2rem;
+  color: #454545;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-0);
+  transition: transform 0.3s ease-in-out
+}
+
+.timer-menu__options,
+.timer-menu__times,
+.timer-menu__settings {
+  display: flex;
+  flex-direction: column;
+  background-color: #D3D3D3;
+  margin: 1em 0;
+  border-radius: 6px;
+  box-shadow: 0 0 2em rgb(0 0 0 / 20%);
+}
+
+.timer-menu__options label,
+.timer-menu__times label,
+.timer-menu__settings label {
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 1em;
+  transition: background-color 0.2s linear;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timer-menu__times label {
+  justify-content: space-between;
+}
+
+.info {
+  font-size: 0.75em;
+}
+.timer-menu__options input,
+.timer-menu__settings input {
+  inline-size: 1.3em;
+  block-size: 1.3em;
+  text-align: center;
+}
+
+.timer-menu__times input {
+  display: block;
+  inline-size: 3.3em;
+  block-size: 1.5em;
+  text-align: center;
+  border: 1px solid #454545;
+  outline: none;
+}
+
+.timer-menu__times input.valid:focus {
+  border-color: green;
+}
+
+.timer-menu__times input.invalid:focus {
+  border-color: red;
+}
+
+.timer-menu__times input:focus ~ .tooltip {
+  display: block;
+  opacity: 1;
+}
+
+.timer-menu__controls button {
+  display: block;
+  width: 100%;
+  padding: 1em;
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #D3D3D3;
+}
+
+.timer-menu__controls button:hover {
+  background-color: #fff;
+}
+
+.timer-container {
+  display: table;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.timer-clock {
+  font-size: 348px;
+}
+
+.tooltip {
+  display: none;
+  background: #fff;
+  position: absolute;
+  right: -190px;
+  margin-top: -0.2em;
+  border-radius: 10px;
+  min-width: 160px;
+  padding: 15px 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.tooltip::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #fff;
+  left: -8px;
+  top: 18px;
+}
+
+footer {
+  color: #fff;
+  margin: 35px;
+}
+
+header h1 {
+  margin-bottom: 0px;
+}
