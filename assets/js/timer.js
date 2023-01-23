@@ -1,368 +1,209 @@
-function sec(e) {
-    return 1e3 * e;
-}
-function min(e) {
-    return 6e4 * e;
-}
-function timeToMs(e) {
-    var t = min((e = e.split(":"))[0]).toPrecision(),
-        o = sec(e[1]).toPrecision();
-    return Number(t) + Number(o);
-}
-function msToTime(e) {
-    var t = parseInt((e / 1e3) % 60),
-        o = parseInt((e / 6e4) % 60),
-        n = parseInt((e / 36e5) % 24);
-    return (o = o < 10 ? "0" + o : o) + ":" + (t = t < 10 ? "0" + t : t);
-}
-function validate(e, t) {
-    return !0 === t.test(e.value);
-}
-function onSpaceKey(e) {
-    document.onkeypress = function (t) {
-        32 == t.keyCode &&
-            "button" != document.activeElement.nodeName.toLowerCase() &&
-            (t.preventDefault(), e());
-    };
-}
-function colorChange(e) {
-    bgElement.style.backgroundColor = e;
-}
-function reportTime() {
-    if (
-        ((currentTime += 1e3),
-            (clockElement.innerHTML = msToTime(currentTime)),
-            currentTime < minTime)
-    )
-        colorChange(defaultColor);
-    else if (currentTime === minTime) colorChange(minColor);
-    else if (currentTime === midTime) colorChange(midColor);
-    else if (currentTime === maxTime) colorChange(maxColor);
-    else if (currentTime === dqTime) {
-        var e = !0,
-            t;
-        pulsateIntervalId = setInterval(function () {
-            !0 === e
-                ? (colorChange(defaultColor), (e = !1))
-                : (colorChange(maxColor), (e = !0));
-        }, 300);
-    }
-}
-function hideControls() {
-    var e = document.getElementById("hideAway");
-    TweenLite.to(e, 0.5, {
-        css: {
-            transform: "translate(-2000px)",
-            opacity: "0",
-            maxHeight: "0",
-            margin: "0",
-        },
-    }),
-        TweenLite.to(clockElement, 0.2, { css: { paddingLeft: "0" }, delay: 0.5 }),
-        TweenLite.to(infoButton, 0.5, { css: { opacity: "0" } }),
-        (controlButton.className += " timerRunning"),
-        (resetButton.className += " timerRunning");
-}
-function showControls() {
-    var e = document.getElementById("hideAway"),
-        t;
-    if (
-        Math.max(document.documentElement.clientWidth, window.innerWidth || 0) > 570
-    )
-        var o = TweenLite.to(clockElement, 0.2, { css: { paddingLeft: "300px" } });
-    else wrapper.style.bottom = "auto";
-    TweenLite.to(e, 0.5, {
-        css: {
-            transform: "translateY(0)",
-            opacity: "1",
-            maxHeight: "1000px",
-            height: "auto",
-        },
-        delay: 0.2,
-    }),
-        TweenLite.to(infoButton, 0.5, { css: { opacity: "1" } }),
-        (controlButton.className = controlButton.className.replace(
-            /(?:^|\s)timerRunning(?!\S)/,
-            ""
-        ));
-}
-function showInfo() {
-    TweenLite.to(bgElement, 0.5, { css: { filter: "blur(10px)" }, delay: 0.2 }),
-        TweenLite.to(infoButton, 0.5, {
-            css: { backgroundColor: "red", color: "white" },
-            delay: 0,
-        }),
-        TweenLite.to(infoWrapper, 0, { css: { display: "flex" } }),
-        TweenLite.to(infoWrapper, 0.25, { css: { opacity: "1" }, delay: 0.2 }),
-        (infoButton.onclick = function () {
-            hideInfo();
-        }),
-        (infoButton.innerHTML = "&times;"),
-        gtag("event", "Info Displayed");
-}
-function hideInfo() {
-    TweenLite.to(bgElement, 0.5, { css: { filter: "blur(0)" }, delay: 0.2 }),
-        TweenLite.to(infoButton, 0.5, {
-            css: {
-                backgroundColor: "hsla(0, 0, 100, 0.7)",
-                color: "black",
-                fontSize: "1em",
-                fontWeight: "400",
-            },
-            delay: 0.2,
-        }),
-        TweenLite.to(infoWrapper, 0, { css: { display: "none" } }),
-        TweenLite.to(infoWrapper, 0.5, { css: { opacity: "0" }, delay: 0.2 }),
-        (infoButton.onclick = function () {
-            showInfo();
-        }),
-        (infoButton.innerHTML = "i");
-}
-function hideTheClock() {
-    TweenLite.to(clockElement, 0.2, { css: { color: "transparent" } }),
-        TweenLite.to(grower, 0.2, { css: { backgroundColor: "transparent" } });
-}
-function showTheClock() {
-    TweenLite.to(clockElement, 0.2, { css: { color: "rgba(255,255,255,0.3)" } }),
-        TweenLite.to(grower, 0.2, {
-            css: { backgroundColor: "rgba(255,255,255,0.7)" },
-        });
-}
-function setCustomValues() {
-    function e(e) {
-        if (!e) return "";
-        var t = e.length;
-        if (void 0 === t) return e.checked ? e.value : "";
-        for (var o = 0; o < t; o++) if (e[o].checked) return e[o].value;
-        return "";
-    }
-    function t(e, t, o, n) {
-        (customGreenLight.value = e),
-            (customYellowLight.value = t),
-            (customRedLight.value = o),
-            (customDq.value = n),
-            validateAll(customArray);
-    }
-    "tableTopics" === e(radioOptions)
-        ? t("1:00", "1:30", "2:00", "2:30")
-        : "evaluation" === e(radioOptions)
-            ? t("2:00", "2:30", "3:00", "3:30")
-            : "speech" === e(radioOptions)
-                ? t("5:00", "6:00", "7:00", "7:30")
-                : "custom" === e(radioOptions) &&
-                (t("", "", "", ""), customArray[0].focus());
-}
-function startTimer() {
-    if (0 != currentTime) return stopTimer(), !1;
-    var e = [],
-        t = [];
-    for (i = 0; i < customArray.length; i++)
-        !1 === validate(customArray[i], RegExp(/^[0-9]{1,2}:[0-5]{1}[0-9]{1}$/)) &&
-            e.push(customArray[i]);
-    if (e.length > 0) {
-        if (
-            (e.map(function (e) {
-                "customGreenLight" === e.id
-                    ? t.push("green light")
-                    : "customYellowLight" === e.id
-                        ? t.push("yellow light")
-                        : "customRedLight" === e.id
-                            ? t.push("red light")
-                            : "customDq" === e.id && t.push("disqualification");
-            }),
-                1 === t.length)
-        ) {
-            var o =
-                "Whoops, the " +
-                t[0] +
-                " value does not look like it is formatted correctly. There are two accepted formats: \nMM:SS (example: 14:00) \nM:SS (example: 4:15) \nPlease correct it, and try again.";
-            return alert(o);
+const menuOptionsContainer = document.querySelector(".timer-menu__options");
+const menuOptions = document.querySelectorAll("input[name=timerOptions]");
+const menuTimesContainer = document.querySelector(".timer-menu__times");
+const menuTimes = document.querySelectorAll(".timer-menu__times input");
+const showClockCheckbox = document.getElementById("showClock");
+const timerMenu = document.querySelectorAll(
+  ".timer-menu__options, .timer-menu__times, .timer-menu__settings"
+);
+const controlButton = document.getElementById("controlButton");
+const resetButton = document.getElementById("resetButton");
+const timerClock = document.querySelector(".timer-clock");
+
+const iceBreakerTimes = ["4:00", "5:00", "6:00", "6:30"];
+const regularSpeechTimes = ["5:00", "6:00", "7:00", "7:30"];
+const longSpeechTimes = ["10:00", "11:00", "12:00", "12:30"];
+const tableTopicsSpeechTimes = ["1:00", "1:30", "2:00", "2:30"];
+const evaluationSpeechTimes = ["2:00", "2:30", "3:00", "3:30"];
+const customSpeechTimes = ["mm:ss", "mm:ss", "mm:ss", "mm:ss"];
+
+let currentTime = 0;
+let prevClicked = false;
+let intervalID = 0;
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  //Update menuTimes based on selected menuOptions
+  menuOptions.forEach((el) => {
+    el.addEventListener("click", () => {
+      if (el.checked === true) {
+        switch (el.id) {
+          case "iceBreaker": {
+            let count = 0;
+            menuTimes.forEach((el) => {
+              //el.className = "valid";
+              el.value = iceBreakerTimes[count];
+              count++;
+            });
+            break;
+          }
+
+          case "regularSpeech": {
+            let count = 0;
+            menuTimes.forEach((el) => {
+              //el.className = "valid";
+              el.value = regularSpeechTimes[count];
+              count++;
+            });
+            break;
+          }
+
+          case "longSpeech": {
+            let count = 0;
+            menuTimes.forEach((el) => {
+              //el.className = "valid";
+              el.value = longSpeechTimes[count];
+              count++;
+            });
+            break;
+          }
+
+          case "tableTopics": {
+            let count = 0;
+            menuTimes.forEach((el) => {
+              //el.className = "valid";
+              el.value = tableTopicsSpeechTimes[count];
+              count++;
+            });
+            break;
+          }
+
+          case "evaluationSpeech": {
+            let count = 0;
+            menuTimes.forEach((el) => {
+              //el.className = "valid";
+              el.value = evaluationSpeechTimes[count];
+              count++;
+            });
+            break;
+          }
+
+          case "customSpeech": {
+            let count = 0;
+            menuTimes.forEach((el) => {
+              //el.className = "invalid";
+              el.value = customSpeechTimes[count];
+              count++;
+            });
+            break;
+          }
+
+          default: {
+            break;
+          }
         }
-        if (2 === t.length) {
-            var o =
-                "Whoops, the " +
-                t[0] +
-                " and " +
-                t[1] +
-                " values do not look like they are formatted correctly. There are two accepted formats: \nMM:SS (example: 14:00) \nM:SS (example: 4:15) \nPlease correct them, and try again.";
-            return alert(o);
-        }
-        if (3 === t.length) {
-            var o =
-                "Whoops, the " +
-                t[0] +
-                "," +
-                t[1] +
-                " and " +
-                t[2] +
-                " values do not look like they are formatted correctly. There are two accepted formats: \nMM:SS (example: 14:00) \nM:SS (example: 4:15) \nPlease correct them, and try again.";
-            return alert(o);
-        }
-        if (3 === t.length) {
-            var o =
-                "Whoops, none of the time values look like they are formatted correctly. There are two accepted formats: \nMM:SS (example: 14:00) \nM:SS (example: 4:15) \nPlease correct them, and try again.";
-            return alert(o);
-        }
-        var o =
-            "Whoops, it looks like you formatted at least one of the time formats incorrectly. There are two accepted formats: \nMM:SS (example: 14:00) \nM:SS (example: 4:15) \nPlease correct them, and try again.";
-        return alert(o);
-    }
-    (minTime = timeToMs(customGreenLight.value)),
-        (midTime = timeToMs(customYellowLight.value)),
-        (maxTime = timeToMs(customRedLight.value)),
-        (dqTime = timeToMs(customDq.value)),
-        (controlButton.innerHTML = "Stop"),
-        (controlButton.onclick = stopTimer),
-        onSpaceKey(stopTimer),
-        hideControls(),
-        (growerAnimation = TweenLite.to(grower, dqTime / 1e3, {
-            css: { width: "100%" },
-        })),
-        (clockElement.innerHTML = msToTime(0)),
-        (clockIntervalId = setInterval(reportTime, 1e3)),
-        gtag("event", "Timer Start");
-}
-function stopTimer() {
-    (controlButton.innerHTML = "Resume"),
-        (controlButton.onclick = resumeTimer),
-        showTheClock(),
-        onSpaceKey(resetTimer),
-        window.clearTimeout(minColorTimeoutId),
-        window.clearTimeout(midColorTimeoutId),
-        window.clearTimeout(maxColorTimeoutId),
-        window.clearTimeout(fullColorTimeoutId),
-        clearInterval(pulsateIntervalId),
-        growerAnimation.pause(),
-        clearInterval(clockIntervalId),
-        TweenLite.to(resetButton, 0.5, { css: { transform: "translate(0)" } }),
-        (resetButton.onclick = function () {
-            resetTimer();
-        }),
-        gtag("event", "Timer Stop");
-}
-function resumeTimer() {
-    (controlButton.innerHTML = "Stop"),
-        (controlButton.onclick = stopTimer),
-        0 == showClock.checked && hideTheClock(),
-        TweenLite.to(resetButton, 0.5, {
-            css: { transform: "translate(-2000px)" },
-        }),
-        onSpaceKey(stopTimer),
-        growerAnimation.resume(),
-        (clockIntervalId = setInterval(reportTime, 1e3));
-}
-function resetTimer() {
-    (controlButton.innerHTML = "Start"),
-        (controlButton.onclick = startTimer),
-        0 == showClock.checked && hideTheClock(),
-        (currentTime = 0),
-        (clockElement.innerHTML = msToTime(currentTime)),
-        colorChange(defaultColor),
-        growerAnimation.seek(0),
-        showControls(),
-        onSpaceKey(startTimer),
-        TweenLite.to(resetButton, 0.5, {
-            css: { transform: "translate(-2000px)" },
-        });
-}
-function validateWatch(e) {
-    timeout && (clearTimeout(timeout), (timeout = null)),
-        (timeout = setTimeout(function () {
-            validateThis(e);
-        }, 200));
-}
-!(function (e) {
-    "use strict";
-    var t = function (e, t, o) {
-        e.addEventListener
-            ? e.addEventListener(t, o, !1)
-            : e.attachEvent("on" + t, o);
-    };
-    e.fitText = function (o, n) {
-        var r = -1 / 0,
-            i = 1 / 0,
-            a = function (o) {
-                var a = n || 1,
-                    l = function () {
-                        o.style.fontSize =
-                            Math.max(
-                                Math.min(o.clientWidth / (10 * a), parseFloat(i)),
-                                parseFloat(r)
-                            ) + "px";
-                    };
-                l(), t(e, "resize", l);
-            },
-            l,
-            c = o.length;
-        if (c) for (l = 0; l < c; l += 1) a(o[l]);
-        else a(o);
-        return o;
-    };
-})(this),
-    window.fitText(document.getElementById("clock"), 0.5);
-var customArray = [
-    document.getElementById("customGreenLight"),
-    document.getElementById("customYellowLight"),
-    document.getElementById("customRedLight"),
-    document.getElementById("customDq"),
-],
-    bgElement = document.getElementById("wrapper"),
-    grower = document.getElementById("grower"),
-    clockElement = document.getElementById("clock"),
-    controlButton = document.getElementById("controlButton"),
-    resetButton = document.getElementById("resetButton"),
-    infoButton = document.getElementById("infoButton"),
-    clockWrapper = document.getElementById("clockWrapper"),
-    infoWrapper = document.getElementById("info"),
-    customGreenLight = customArray[0],
-    customYellowLight = customArray[1],
-    customRedLight = customArray[2],
-    customDq = customArray[3],
-    showClock = document.getElementById("showClock"),
-    clockIntervalId = void 0,
-    minColorTimeoutId = void 0,
-    midColorTimeoutId = void 0,
-    maxColorTimeoutId = void 0,
-    fullColorTimeoutId = void 0,
-    pulsateIntervalId = void 0,
-    currentTime = 0,
-    minTime = void 0,
-    midTime = void 0,
-    maxTime = void 0,
-    dqTime = void 0,
-    growerAnimation = void 0,
-    defaultColor = "hsl(0, 0%, 27%)",
-    minColor = "hsl(119, 59%, 52%)",
-    midColor = "hsl(51, 78%, 57%)",
-    maxColor = "hsl(353, 76%, 58%)";
-(TweenLite.defaultEase = Linear.easeNone),
-    (infoButton.onclick = function () {
-        showInfo();
-    }),
-    showClock.addEventListener("change", function () {
-        0 == showClock.checked ? hideTheClock() : showTheClock();
+      }
     });
-for (
-    var radioOptions = document.querySelectorAll("#predefined input"),
-    i = 0,
-    timeout;
-    i < radioOptions.length;
-    i++
-)
-    radioOptions[i].onclick = setCustomValues;
-(controlButton.onclick = function () {
-    startTimer();
-}),
-    onSpaceKey(startTimer);
-var validateThis = function (e) {
-    !0 === /^[0-9]{1,2}:[0-5]{1}[0-9]{1}$/.test(e.value)
-        ? (e.className = "valid")
-        : (e.className = "invalid");
-},
-    validateAll = function (e) {
-        for (i = 0; i < e.length; i++) validateThis(e[i]);
-    };
-document.addEventListener("DOMContentLoaded", function () {
-    validateAll(customArray);
+  });
+
+  //Validates menuTimes MM:SS format
+  menuTimes.forEach((el) => {
+    el.addEventListener("focus", () => {
+      if (el.value.match(/^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/)) {
+        el.className = "valid";
+      } else {
+        console.log(el.value + " is not a valid format");
+        el.className = "invalid";
+        console.log(el.parentElement);
+      }
+    });
+  });
+
+  controlButton.addEventListener("click", () => {
+    console.log("prevClicked: " + prevClicked);
+    if (!prevClicked) {
+      startTimer();
+    } else {
+      stopTimer();
+    }
+  });
+
+  resetButton.addEventListener("click", () => {
+    resetTimer();
+  });
+
+  showClockCheckbox.addEventListener("click", () => {
+    showClock();
+  });
 });
-//# sourceMappingURL=app.js.map
+
+function startTimer() {
+  let minTime = timeToMs(menuTimes[0].value);
+  let midTime = timeToMs(menuTimes[1].value);
+  let maxTime = timeToMs(menuTimes[2].value);
+  let dqTime = timeToMs(menuTimes[3].value);
+
+  if (intervalID !== 0) {
+    clearInterval(intervalID);
+  }
+
+  intervalID = setInterval(() => {
+    currentTime += 1e3;
+    timerClock.innerHTML = msToTime(currentTime);
+    if (currentTime == minTime) {
+      document.body.style.backgroundColor = "green";
+    } else if (currentTime == midTime) {
+      document.body.style.backgroundColor = "yellow";
+    } else if (currentTime == maxTime) {
+      document.body.style.backgroundColor = "red";
+    } else if (currentTime == dqTime) {
+      document.body.style.backgroundColor = "white";
+    }
+  }, 1000);
+
+  controlButton.innerHTML = "Stop";
+  prevClicked = true;
+}
+
+function stopTimer() {
+  clearInterval(intervalID);
+  controlButton.innerHTML = "Resume";
+  console.log("stopTimer function executed");
+  prevClicked = false;
+  console.log("prevClicked set to " + prevClicked);
+}
+
+function resetTimer() {
+  clearInterval(intervalID);
+  currentTime = 0;
+  timerClock.innerHTML = msToTime(currentTime);
+  controlButton.innerHTML = "Start";
+  prevClicked = false;
+  console.log("reset timer executed");
+  console.log("prevClicked set to " + prevClicked);
+}
+
+function showClock() {
+  if (!showClockCheckbox.checked) {
+    timerClock.style.visibility = "hidden";
+  } else {
+    timerClock.style.visibility = "unset";
+  }
+}
+
+function hideTimerMenu() {}
+
+function showTimerMenu() {}
+
+//converts MM:SS time format to milliseconds
+function timeToMs(e) {
+  var t = minuntes((e = e.split(":"))[0]).toPrecision(),
+    o = seconds(e[1]).toPrecision();
+  return Number(t) + Number(o);
+}
+
+//converts milliseconds to MM:SS time format
+function msToTime(e) {
+  var t = parseInt((e / 1e3) % 60),
+    o = parseInt((e / 6e4) % 60),
+    n = parseInt((e / 36e5) % 24);
+  return (o = o < 10 ? "0" + o : o) + ":" + (t = t < 10 ? "0" + t : t);
+}
+
+//converts seconds to milliseconds
+function seconds(e) {
+  return 1e3 * e;
+}
+//converts minutes to milliseconds
+function minuntes(e) {
+  return 6e4 * e;
+}
