@@ -161,7 +161,7 @@ function resetTimer() {
   currentTime = 0;
   timerClock.innerHTML = msToTime(currentTime);
   controlButton.innerHTML = "Start";
-  container.style.removeProperty("backgroundColor");
+  container.style.removeProperty("background-color");
   prevClicked = false;
 }
 
