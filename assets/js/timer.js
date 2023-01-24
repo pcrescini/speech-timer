@@ -1,11 +1,10 @@
+const container = document.body;
 const menuOptionsContainer = document.querySelector(".timer-menu__options");
 const menuOptions = document.querySelectorAll("input[name=timerOptions]");
 const menuTimesContainer = document.querySelector(".timer-menu__times");
 const menuTimes = document.querySelectorAll(".timer-menu__times input");
 const showClockCheckbox = document.getElementById("showClock");
-const timerMenu = document.querySelectorAll(
-  ".timer-menu__options, .timer-menu__times, .timer-menu__settings"
-);
+const timerMenu = document.querySelectorAll(".timer-menu__options, .timer-menu__times, .timer-menu__settings");
 const controlButton = document.getElementById("controlButton");
 const resetButton = document.getElementById("resetButton");
 const timerClock = document.querySelector(".timer-clock");
@@ -101,15 +100,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
       if (el.value.match(/^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/)) {
         el.className = "valid";
       } else {
-        console.log(el.value + " is not a valid format");
         el.className = "invalid";
-        console.log(el.parentElement);
       }
     });
   });
 
   controlButton.addEventListener("click", () => {
-    console.log("prevClicked: " + prevClicked);
     if (!prevClicked) {
       startTimer();
     } else {
@@ -140,13 +136,13 @@ function startTimer() {
     currentTime += 1e3;
     timerClock.innerHTML = msToTime(currentTime);
     if (currentTime == minTime) {
-      document.body.style.backgroundColor = "green";
+      container.style.backgroundColor = "green";
     } else if (currentTime == midTime) {
-      document.body.style.backgroundColor = "yellow";
+      container.style.backgroundColor = "yellow";
     } else if (currentTime == maxTime) {
-      document.body.style.backgroundColor = "red";
+      container.style.backgroundColor = "red";
     } else if (currentTime == dqTime) {
-      document.body.style.backgroundColor = "white";
+      container.style.backgroundColor = "white";
     }
   }, 1000);
 
@@ -157,9 +153,7 @@ function startTimer() {
 function stopTimer() {
   clearInterval(intervalID);
   controlButton.innerHTML = "Resume";
-  console.log("stopTimer function executed");
   prevClicked = false;
-  console.log("prevClicked set to " + prevClicked);
 }
 
 function resetTimer() {
@@ -167,9 +161,8 @@ function resetTimer() {
   currentTime = 0;
   timerClock.innerHTML = msToTime(currentTime);
   controlButton.innerHTML = "Start";
+  container.style.removeProperty("backgroundColor");
   prevClicked = false;
-  console.log("reset timer executed");
-  console.log("prevClicked set to " + prevClicked);
 }
 
 function showClock() {
