@@ -4,7 +4,9 @@ const menuOptions = document.querySelectorAll("input[name=timerOptions]");
 const menuTimesContainer = document.querySelector(".timer-menu__times");
 const menuTimes = document.querySelectorAll(".timer-menu__times input");
 const showClockCheckbox = document.getElementById("showClock");
-const timerMenu = document.querySelectorAll(".timer-menu__options, .timer-menu__times, .timer-menu__settings");
+const timerMenu = document.querySelectorAll(
+  ".timer-menu__options, .timer-menu__times, .timer-menu__settings"
+);
 const controlButton = document.getElementById("controlButton");
 const resetButton = document.getElementById("resetButton");
 const timerClock = document.querySelector(".timer-clock");
@@ -148,6 +150,9 @@ function startTimer() {
 
   controlButton.innerHTML = "Stop";
   prevClicked = true;
+  timerMenu.forEach((el) => {
+    el.classList.add("hide");
+  });
 }
 
 function stopTimer() {
@@ -163,6 +168,11 @@ function resetTimer() {
   controlButton.innerHTML = "Start";
   container.style.removeProperty("background-color");
   prevClicked = false;
+  timerMenu.forEach((el) => {
+    if (el.classList.contains("hide")) {
+      el.classList.remove("hide");
+    }
+  });
 }
 
 function showClock() {

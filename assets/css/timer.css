@@ -3,6 +3,7 @@ body {
   font-size: 1rem;
   color: #F1FFFA;
   background-color: #252422;
+  margin: 2em;
 }
 
 button {
@@ -16,6 +17,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1em;
 }
 
 header h1 {
@@ -25,23 +27,17 @@ header h1 {
 }
 
 main {
-  position: absolute;
-  top: 150px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  display: flex;
+  align-items: center;
   transition: background-color 0.3s linear;
 }
 
 aside {
-  width: 300px;
-  margin: 2rem;
   color: #454545;
-  position: absolute;
-  top: 0;
-  bottom: 0;
   transform: translateX(-0);
-  transition: transform 0.3s ease-in-out
+  transition: transform 0.3s ease-in-out;
+  flex: 1;
+  min-width: 300px;
 }
 
 .timer-menu__options,
@@ -54,6 +50,13 @@ aside {
   border-radius: 6px;
   box-shadow: 0 0 2em rgb(0 0 0 / 20%);
 }
+
+.timer-menu__options.hide,
+.timer-menu__times.hide,
+.timer-menu__settings.hide {
+  display: none;
+}
+
 
 .timer-menu__options label,
 .timer-menu__times label,
@@ -122,13 +125,14 @@ aside {
 }
 
 .timer-container {
+  flex: 4;
   display: table;
   width: 100%;
   height: 100%;
   text-align: center;
 }
 .timer-clock {
-  font-size: 348px;
+  font-size: 15vw;
 }
 
 .tooltip {
@@ -164,4 +168,14 @@ footer {
 
 header h1 {
   margin-bottom: 0px;
+}
+
+@media (300px <= width <= 600px) {
+  main {
+    flex-direction: column;
+  }
+
+  aside {
+    width: 100%;
+  }
 }
