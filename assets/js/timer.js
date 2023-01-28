@@ -4,9 +4,7 @@ const menuOptions = document.querySelectorAll("input[name=timerOptions]");
 const menuTimesContainer = document.querySelector(".timer-menu__times");
 const menuTimes = document.querySelectorAll(".timer-menu__times input");
 const showClockCheckbox = document.getElementById("showClock");
-const timerMenu = document.querySelectorAll(
-  ".timer-menu__options, .timer-menu__times, .timer-menu__settings"
-);
+const timerMenu = document.querySelectorAll(".timer-menu__options, .timer-menu__times, .timer-menu__settings");
 const controlButton = document.getElementById("controlButton");
 const resetButton = document.getElementById("resetButton");
 const timerClock = document.querySelector(".timer-clock");
@@ -182,10 +180,6 @@ function showClock() {
     timerClock.style.visibility = "unset";
   }
 }
-
-function hideTimerMenu() {}
-
-function showTimerMenu() {}
 
 //converts MM:SS time format to milliseconds
 function timeToMs(e) {
