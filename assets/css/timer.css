@@ -170,12 +170,13 @@ header h1 {
   margin-bottom: 0px;
 }
 
-@media (300px <= width <= 600px) {
+@media (max-width: 600px) {
   main {
     flex-direction: column;
   }
 
   aside {
     width: 100%;
+    order: 2;
   }
 }
