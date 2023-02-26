@@ -1,180 +1,183 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>U.S. Flag</title>
-    <link rel="stylesheet" src="./assets/css/flag-styles.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&family=Roboto&display=swap"
-        rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-        :root {
-            --flag-height: 263px;
-            --flag-width: 500px;
-        }
+  <title>U.S. Flag</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" src="./assets/css/flag-styles.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&family=Roboto&display=swap"
+    rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --flag-height: 263px;
+      --flag-width: 500px;
+    }
 
-        .flag {
-            margin: 0 auto;
-            width: var(--flag-width);
-            height: var(--flag-height);
-        }
+    .flag {
+      margin: 0 auto;
+      width: var(--flag-width);
+      height: var(--flag-height);
+    }
 
-        .flag__stars {
-            background-color: #002147;
-            width: calc(var(--flag-width) * 2 / 5);
-            height: calc(var(--flag-height) * 7 / 13);
-        }
+    .flag__stars {
+      background-color: #002147;
+      width: calc(var(--flag-width) * 2 / 5);
+      height: calc(var(--flag-height) * 7 / 13);
+    }
 
-        .flag__stars__row {
-            display: flex;
-            align-items: center;
-        }
+    .flag__stars__row {
+      display: flex;
+      align-items: center;
+    }
 
-        .flag__stars__row:nth-child(odd) {
-            justify-content: space-around;
-        }
+    .flag__stars__row:nth-child(odd) {
+      justify-content: space-around;
+    }
 
-        .flag__stars__row:nth-child(even) {
-            justify-content: space-evenly
-        }
+    .flag__stars__row:nth-child(even) {
+      justify-content: space-evenly
+    }
 
 
-        .flag__stripes--stripe {
-            height: calc(var(--flag--height) / 13)
-        }
+    .flag__stripes--stripe {
+      height: calc(var(--flag--height) / 13)
+    }
 
-        .flag__stripes--stripe:nth-child(odd) {
-            background-color: #bb133e
-        }
+    .flag__stripes--stripe:nth-child(odd) {
+      background-color: #bb133e
+    }
 
-        .flag__stripes--stripes:nth-child(even) {
-            background-color: #ffffff;
-        }
+    .flag__stripes--stripes:nth-child(even) {
+      background-color: #ffffff;
+    }
 
-        .flag__stripes--stripes--red {
-            background-color: #bb133e;
-        }
+    .flag__stripes--stripes--red {
+      background-color: #bb133e;
+    }
 
-        .flag__stripes--stripes--white {
-            background-color: #ffffff;
-        }
+    .flag__stripes--stripes--white {
+      background-color: #ffffff;
+    }
 
-        .star {
-            color: #ffffff;
-            display: block;
-            max-height: calc(var(--flag--height) * 7 / 13 * 0.1);
-        }
-    </style>
+    .star {
+      color: #ffffff;
+      display: block;
+      max-height: calc(var(--flag--height) * 7 / 13 * 0.1);
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <h1>Paul C Crescini</h1>
-        <h2>Front-end Web Developer</h2>
-    </header>
+  <header>
+    <h1>Paul C Crescini</h1>
+    <h2>Front-end Web Developer</h2>
+  </header>
 
-    <main>
-        <h3>CSS US Flag</h3>
+  <main>
+    <h3>CSS US Flag</h3>
 
-        <div class="flag">
-            <div class="flag__stars">
-                <div class="flag__stars__row">
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                </div>
-                <div class="flag__stars__row">
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                </div>
-                <div class="flag__stars__row">
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                </div>
-                <div class="flag__stars__row">
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                </div>
-                <div class="flag__stars__row">
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                </div>
-                <div class="flag__stars__row">
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                </div>
-                <div class="flag__stars__row">
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                </div>
-                <div class="flag__stars__row">
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                </div>
-                <div class="flag__stars__row">
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                    <div class="star">&starf;</div>
-                </div>
-            </div>
-            <div class="flag__stripes">
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-                <div class="flag__stripes--stripe"></div>
-            </div>
+    <div class="flag">
+      <div class="flag__stars">
+        <div class="flag__stars__row">
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
         </div>
-
-    </main>
-
-    <footer>
-        <div class="contact">
-            <h3></h3>
-            <div class="contact-email"></div>
-            <div class="contact-instagram"></div>
+        <div class="flag__stars__row">
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
         </div>
-    </footer>
-    <script src="./assets/js/index.js" defer></script>
+        <div class="flag__stars__row">
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+        </div>
+        <div class="flag__stars__row">
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+        </div>
+        <div class="flag__stars__row">
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+        </div>
+        <div class="flag__stars__row">
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+        </div>
+        <div class="flag__stars__row">
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+        </div>
+        <div class="flag__stars__row">
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+        </div>
+        <div class="flag__stars__row">
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+          <div class="star">&starf;</div>
+        </div>
+      </div>
+      <div class="flag__stripes">
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+        <div class="flag__stripes--stripe"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="contact">
+      <h3></h3>
+      <div class="contact-email"></div>
+      <div class="contact-instagram"></div>
+    </div>
+  </footer>
+  <script src="./assets/js/index.js" defer></script>
 </body>
 
 </html>
