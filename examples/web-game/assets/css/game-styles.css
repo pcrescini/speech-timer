@@ -20,6 +20,6 @@
   pointer-events: none; /*prevents interfering with canvas mouse events*/
 }
 
-#obstacles {
+#obstacles, #bull, #egg {
   display: none;
 }
