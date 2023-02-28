@@ -172,7 +172,7 @@ window.addEventListener('load', function() {
       this.spriteX;
       this.spriteY;
       this.hatchTimer = 0;
-      this.hatchInterval = 5000;
+      this.hatchInterval = 3000;
       this.markedForDeletion = false;
     }
 
@@ -328,7 +328,6 @@ window.addEventListener('load', function() {
 
        //collisions with objects
       let collisionObjects = [this.game.player, ...this.game.obstacles];
-
       collisionObjects.forEach((object) => {
         let [collision, distance, sumOfRadii, dx, dy] =
           this.game.checkCollision(this, object);
@@ -347,6 +346,9 @@ window.addEventListener('load', function() {
           this.markedForDeletion = true;
           this.game.removeGameObjects();
           this.game.lostHatchlings++;
+          for (let i = 0; i < this.game.maxParticles; i++) {
+            this.game.particles.push(new Spark(this.game, this.collisionX, this.collisionY, 'blue'));
+          }
         }
       });
     }
@@ -359,8 +361,8 @@ window.addEventListener('load', function() {
       this.collisionY = y;
       this.color = color;
       this.radius = Math.floor(Math.random() * 10 + 5);
-      this.speedX = Math.random() * 6 -3;
-      this.sppedY = Math.random() * 2 + 0.5;
+      this.speedX = Math.random() * 6 - 3;
+      this.speedY = Math.random() * 2 + 0.5;
       this.angle = 0;
       this.velocityOfAngle = Math.random() * 0.1 + 0.01;
       this.markedForDeletion = false;
@@ -381,8 +383,8 @@ window.addEventListener('load', function() {
   class Firefly extends Particle {
     update() {
       this.angle += this.velocityOfAngle;
-      this.collisionX += this.speedX;
-      this.collisionY -= this.sppedY;
+      this.collisionX += Math.cos(this.angle) * this.speedX; //adds wave motion to firefly particle
+      this.collisionY -= this.speedY;
       if (this.collisionY < 0 - this.radius) {
         this.markedForDeletion = true;
         this.game.removeGameObjects();
@@ -392,7 +394,19 @@ window.addEventListener('load', function() {
 
   class Spark extends Particle {
     update() {
+      this.angle += this.velocityOfAngle * 0.5;
+      this.collisionX -= Math.cos(this.angle) * this.speedX;
+      this.collisionY -= Math.sin(this.angle) * this.speedY;
 
+      //shrinks the spark radius
+      if (this.radius > 0.1) {
+        this.radius -= 0.05;
+      }
+
+      if (this.radius < 0.2) {
+        this.markedForDeletion = true;
+        this.game.removeGameObjects();
+      }
     }
   }
 
