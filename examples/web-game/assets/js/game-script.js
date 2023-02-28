@@ -291,12 +291,12 @@ window.addEventListener('load', function() {
       this.spriteX;
       this.spriteY;
       this.speedY = 1 + Math.random();
-      this.frameX = Math.floor(Math.random() * 1)
+      this.frameX = 0;
       this.frameY = Math.floor(Math.random() * 2);
     }
 
     draw(context) {
-      context.drawImage(this.image, 0, 0, this.spriteWidth, this.spriteHeight, this.spriteX, this.spriteY, this.width, this.height);
+      context.drawImage(this.image, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.spriteX, this.spriteY, this.width, this.height);
       if (this.game.debug) {
         context.beginPath();
         context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
@@ -317,8 +317,33 @@ window.addEventListener('load', function() {
       if (this.collisionY < this.game.topMargin) {
         this.markedForDeletion = true;
         this.game.removeGameObjects();
-
+        this.game.score++;
       }
+
+       //collisions with objects
+      let collisionObjects = [this.game.player, ...this.game.obstacles];
+
+      collisionObjects.forEach((object) => {
+        let [collision, distance, sumOfRadii, dx, dy] =
+          this.game.checkCollision(this, object);
+
+        if (collision) {
+          const unit_x = dx / distance; //will always be a value between -1 and 1
+          const unit_y = dy / distance; //will always be a value between -1 and 1
+          this.collisionX = object.collisionX + (sumOfRadii + 1) * unit_x;
+          this.collisionY = object.collisionY + (sumOfRadii + 1) * unit_y;
+        }
+      });
+
+      //collisions with enemies
+      this.game.enemies.forEach(enemy => {
+        if (this.game.checkCollision(this, enemy)[0]) {
+          this.markedForDeletion = true;
+          this.game.markedForDeletion();
+          this.game.removeGameObjects();
+          this.game.lostHatchlings++;
+        }
+      });
     }
   }
   class Game {
@@ -343,6 +368,8 @@ window.addEventListener('load', function() {
       this.gameObjects = [];
       this.enemies = [];
       this.maxEnemies = 3;
+      this.score = 0;
+      this.lostHatchlings = 0;
       this.mouse = {
         x: this.width * 0.5,
         y: this.height * 0.5,
