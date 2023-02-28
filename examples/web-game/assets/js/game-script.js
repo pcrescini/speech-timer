@@ -261,6 +261,44 @@ window.addEventListener('load', function() {
       });
     }
   }
+
+  class Larva {
+    constructor(game, x, y) {
+      this.game = game;
+      this.collisionX = x;
+      this.collisionY = y;
+      this.collisionRadius = 30;
+      this.image = document.querySelector("#larva");
+      this.spriteWidth = 150;
+      this.spriteHeight = 150;
+      this.width = this.spriteWidth;
+      this.height = this.spriteHeight;
+      this.spriteX;
+      this.spriteY;
+      this.speedY = 1 + Math.random();
+      this.frameX = Math.floor(Math.random() * 1)
+      this.frameY = Math.floor(Math.random() * 2);
+    }
+
+    draw(context) {
+      context.drawImage(this.image, this.spriteX, this.spriteY);
+      if (this.game.debug) {
+        context.beginPath();
+        context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
+        context.save(); //create snapshot of current canvas state
+        context.globalAlpha = 0.5;
+        context.fill();
+        context.restore(); //restores all canvas settings prior to save method
+        context.stroke();
+      }
+    }
+
+    update() {
+      this.collisionY -= this.speedY;
+      this.spriteX = this.collisionX - this.width * 0.5;
+      this.spriteY = this.collisionY - this.height * 0.5;
+    }
+  }
   class Game {
     //initialize class properties
     constructor(canvas) {
