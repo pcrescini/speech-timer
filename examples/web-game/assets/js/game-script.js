@@ -7,9 +7,10 @@ window.addEventListener('load', function() {
 
   ctx.fillStyle = 'white';
   ctx.lineWidth = 3;
-  ctx.stokeStyle = 'black';
+  ctx.strokeStyle = 'black';
   ctx.font = '40px Helvetica';
   ctx.textAlign = 'center';
+
   class Player {
     //initialize class properties
     constructor(game) {
@@ -225,7 +226,7 @@ window.addEventListener('load', function() {
       this.game = game;
       this.collisionRadius = 30;
       this.speedX = Math.random() * 5 + 0.5;
-      this.image = document.querySelector('#toad');
+      this.image = document.querySelector("#toad");
       this.spriteWidth = 140;
       this.spriteHeight = 260;
       this.width = this.spriteWidth;
@@ -234,10 +235,12 @@ window.addEventListener('load', function() {
       this.collisionY = this.game.topMargin + Math.random() * (this.game.height - this.game.topMargin);
       this.spriteX;
       this.spriteY;
+      this.frameX = 0;
+      this.frameY = Math.floor(Math.random() * 4); // use Math.floor() to return an integer that selects a row of the obstacle spritesheet
     }
 
     draw(context) {
-      context.drawImage(this.image, this.spriteX, this.spriteY);
+      context.drawImage(this.image, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.spriteX, this.spriteY, this.width, this.height);
       if (this.game.debug) {
         context.beginPath();
         context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
@@ -318,6 +321,9 @@ window.addEventListener('load', function() {
         this.markedForDeletion = true;
         this.game.removeGameObjects();
         this.game.score++;
+        for (let i = 0; i < this.game.maxParticles; i++) {
+          this.game.particles.push(new Firefly(this.game, this.collisionX, this.collisionY, 'yellow'));
+        }
       }
 
        //collisions with objects
@@ -345,6 +351,51 @@ window.addEventListener('load', function() {
       });
     }
   }
+
+  class Particle {
+    constructor(game, x, y, color) {
+      this.game = game;
+      this.collisionX = x;
+      this.collisionY = y;
+      this.color = color;
+      this.radius = Math.floor(Math.random() * 10 + 5);
+      this.speedX = Math.random() * 6 -3;
+      this.sppedY = Math.random() * 2 + 0.5;
+      this.angle = 0;
+      this.velocityOfAngle = Math.random() * 0.1 + 0.01;
+      this.markedForDeletion = false;
+    }
+
+    draw(context) {
+      context.save();
+      context.fillStyle = this.color;
+      context.beginPath();
+      context.arc(this.collisionX, this.collisionY, this.radius, 0, Math.PI * 2);
+      context.fill();
+      context.stroke();
+      context.restore();
+    }
+
+  }
+
+  class Firefly extends Particle {
+    update() {
+      this.angle += this.velocityOfAngle;
+      this.collisionX += this.speedX;
+      this.collisionY -= this.sppedY;
+      if (this.collisionY < 0 - this.radius) {
+        this.markedForDeletion = true;
+        this.game.removeGameObjects();
+      }
+    }
+  }
+
+  class Spark extends Particle {
+    update() {
+
+    }
+  }
+
   class Game {
     //initialize class properties
     constructor(canvas) {
@@ -364,9 +415,11 @@ window.addEventListener('load', function() {
       this.eggs = [];
       this.maxEggs = 10;
       this.hatchlings = [];
+      this.particles = [];
+      this.maxParticles = 3;
       this.gameObjects = [];
       this.enemies = [];
-      this.maxEnemies = 3;
+      this.maxEnemies = 4;
       this.score = 0;
       this.lostHatchlings = 0;
       this.mouse = {
@@ -410,7 +463,7 @@ window.addEventListener('load', function() {
         context.clearRect(0, 0, this.width, this.height); //clears canvas from (0,0) coordinate to (canvas width, canvas height) coordinate
 
         //create game objects array
-        this.gameObjects = [this.player, ...this.eggs, ...this.obstacles, ...this.enemies, ...this.hatchlings];
+        this.gameObjects = [this.player, ...this.eggs, ...this.obstacles, ...this.enemies, ...this.hatchlings, ...this.particles];
 
         //sort game objects by vertical position (objects with higher vertical positon will be drawn before objects with lower vertical position)
         this.gameObjects.sort((a, b) => {
@@ -466,6 +519,7 @@ window.addEventListener('load', function() {
     removeGameObjects() {
       this.eggs = this.eggs.filter(object => !object.markedForDeletion); //creates a copy of the eggs array with only those not marked for deletion
       this.hatchlings = this.hatchlings.filter(object => !object.markedForDeletion);; //creates a copy of the hatchlings array with only those not marked for deletion
+      this.particles = this.particles.filter(object => !object.markedForDeletion);; //creates a copy of the hatchlings array with only those not marked for deletionis.
     }
 
     init() {
