@@ -8,7 +8,7 @@ window.addEventListener('load', function() {
   ctx.fillStyle = 'white';
   ctx.lineWidth = 3;
   ctx.strokeStyle = 'black';
-  ctx.font = '40px Helvetica';
+  ctx.font = '40px Bangers';
   ctx.textAlign = 'center';
 
   class Player {
@@ -32,6 +32,13 @@ window.addEventListener('load', function() {
       this.spriteY; //determines the top left corner of the sprite
       this.frameX = Math.floor(Math.random() * 59); // use Math.floor() to return an integer that selects a column of the player spritesheet
       this.frameY = Math.floor(Math.random() * 8); // use Math.floor() to return an integer that selects a row of the player spritesheet
+    }
+
+    restart() {
+      this.collisionX = this.game.width * 0.5; //horizontal centerpoint of player collision circle
+      this.collisionY = this.game.height * 0.5; //vertical centerpoint of player collision circle
+      this.spriteX = this.collisionX - this.width * 0.5; //determines the top left corner of the sprite
+      this.spriteY = this.collisionY - this.height * 0.5 - 100; //determines the top left corner of the sprite
     }
 
     draw(context) {
@@ -172,7 +179,7 @@ window.addEventListener('load', function() {
       this.spriteX;
       this.spriteY;
       this.hatchTimer = 0;
-      this.hatchInterval = 3000;
+      this.hatchInterval = 5000;
       this.markedForDeletion = false;
     }
 
@@ -210,8 +217,8 @@ window.addEventListener('load', function() {
         }
       });
 
-      //hatching
-      if (this.hatchTimer > this.hatchInterval) {
+      //hatches eggs when pushed to safety or hatch interval elapses
+      if (this.hatchTimer > this.hatchInterval || this.collisionY < this.game.topMargin) {
         this.game.hatchlings.push(new Larva(this.game, this.collisionX, this.collisionY));
         this.markedForDeletion = true;
         this.game.removeGameObjects();
@@ -258,10 +265,10 @@ window.addEventListener('load', function() {
       this.collisionX -= this.speedX;
 
       //sets horizontal and vertical enemy boundaries
-      if (this.spriteX + this.width < 0) {
-        this.collisionX =
-          this.game.width + this.width + Math.random() * this.game.width * 0.5;
-          this.collisionY = this.game.topMargin + Math.random() * (this.game.height - this.game.topMargin);
+      if (this.spriteX + this.width < 0 && !this.game.gameOver) {
+        this.collisionX = this.game.width + this.width + Math.random() * this.game.width * 0.5;
+        this.collisionY = this.game.topMargin + Math.random() * (this.game.height - this.game.topMargin);
+        this.frameY = Math.floor(Math.random() * 4); //randomizes the enemy sprite
       }
 
       //handles collisions
@@ -314,20 +321,22 @@ window.addEventListener('load', function() {
     update() {
       this.collisionY -= this.speedY;
       this.spriteX = this.collisionX - this.width * 0.5;
-      this.spriteY = this.collisionY - this.height * 0.5 - 50;
+      this.spriteY = this.collisionY - this.height * 0.5 - 40;
 
       //moved to safety
       if (this.collisionY < this.game.topMargin) {
         this.markedForDeletion = true;
         this.game.removeGameObjects();
-        this.game.score++;
+        if (!this.game.gameOver) {
+          this.game.score++;
+        }
         for (let i = 0; i < this.game.maxParticles; i++) {
           this.game.particles.push(new Firefly(this.game, this.collisionX, this.collisionY, 'yellow'));
         }
       }
 
        //collisions with objects
-      let collisionObjects = [this.game.player, ...this.game.obstacles];
+      let collisionObjects = [this.game.player, ...this.game.obstacles, ...this.game.eggs];
       collisionObjects.forEach((object) => {
         let [collision, distance, sumOfRadii, dx, dy] =
           this.game.checkCollision(this, object);
@@ -342,7 +351,7 @@ window.addEventListener('load', function() {
 
       //collisions with enemies
       this.game.enemies.forEach(enemy => {
-        if (this.game.checkCollision(this, enemy)[0]) {
+        if (this.game.checkCollision(this, enemy)[0] && !this.game.gameOver) {
           this.markedForDeletion = true;
           this.game.removeGameObjects();
           this.game.lostHatchlings++;
@@ -424,17 +433,19 @@ window.addEventListener('load', function() {
       this.interval = 1000 / this.fps;
       this.eggTimer = 0;
       this.eggInterval = 1000;
-      this.numberOfObstacles = 10;
+      this.numberOfObstacles = 5;
+      this.maxEggs = 10;
+      this.maxParticles = 3;
+      this.maxEnemies = 4;
       this.obstacles = [];
       this.eggs = [];
-      this.maxEggs = 10;
+      this.enemies = [];
       this.hatchlings = [];
       this.particles = [];
-      this.maxParticles = 3;
       this.gameObjects = [];
-      this.enemies = [];
-      this.maxEnemies = 4;
       this.score = 0;
+      this.winningScore = 5;
+      this.gameOver = false;
       this.lostHatchlings = 0;
       this.mouse = {
         x: this.width * 0.5,
@@ -463,13 +474,18 @@ window.addEventListener('load', function() {
         }
       });
 
-      //enables debug mode
       window.addEventListener('keydown', e => {
-        if (e.key === 'd') {
+        //enables debug mode
+        if (e.key === "d") {
           this.debug = !this.debug;
         }
-
+        //restarts game
+        if (e.key === "r") {
+          this.restart();
+        }
       });
+
+
     }
 
     render(context, deltaTime) {
@@ -496,7 +512,7 @@ window.addEventListener('load', function() {
       this.timer += deltaTime;
 
       //add eggs periodically
-      if (this.eggTimer > this.eggInterval && this.eggs.length < this.maxEggs) {
+      if (this.eggTimer > this.eggInterval && this.eggs.length < this.maxEggs && !this.gameOver) {
         this.addEgg();
         this.eggTimer = 0;
       } else {
@@ -511,6 +527,36 @@ window.addEventListener('load', function() {
         context.fillText('Lost Hatchlings: ' + this.lostHatchlings, 25, 100);
       }
       context.restore();
+
+      //win - lose message
+      if (this.score >= this.winningScore) {
+        context.save();
+        context.fillStyle = 'rgba(0,0,0,0.5';
+        context.fillRect(0,0, this.width, this.height);
+        context.fillStyle = 'white';
+        context.textAlign = 'center';
+        context.shadowOffsetX = 4;
+        context.shadowOffsetY = 4;
+        context.shadowColor = 'black';
+        let message1;
+        let message2;
+        if (this.lostHatchlings <= 5) {
+          //win
+          message1 = 'Bullseye!!!'
+          message2 = 'You bullied the bullies and won the game!'
+        } else {
+          //lose
+          message1 = 'Uh oh!!!';
+          message2 = `Sorry but you lost  ${this.lostHatchlings} hatchlings. Better luck next time!`
+        }
+        context.font = '130px Bangers';
+        context.fillText(message1, this.width * 0.5, this.height * 0.5 - 30);
+        context.font = '40px Bangers';
+        context.fillText(message2, this.width * 0.5, this.height * 0.5 + 30);
+        context.fillText(`Final Score: ${this.score}. Press 'R' to butt heads again!`, this.width * 0.5, this.height * 0.5 + 80);
+        context.restore();
+        this.gameOver = true;
+      }
     }
 
     addEgg() {
@@ -534,6 +580,24 @@ window.addEventListener('load', function() {
       this.eggs = this.eggs.filter(object => !object.markedForDeletion); //creates a copy of the eggs array with only those not marked for deletion
       this.hatchlings = this.hatchlings.filter(object => !object.markedForDeletion);; //creates a copy of the hatchlings array with only those not marked for deletion
       this.particles = this.particles.filter(object => !object.markedForDeletion);; //creates a copy of the hatchlings array with only those not marked for deletionis.
+    }
+
+    restart() {
+      this.player.restart();
+      this.obstacles = [];
+      this.eggs = [];
+      this.enemies = [];
+      this.hatchlings = [];
+      this.particles = [];
+      this.score = 0;
+      this.lostHatchlings = 0;
+      this.gameOver = false;
+      this.mouse = {
+        x: this.width * 0.5,
+        y: this.height * 0.5,
+        pressed: false,
+      };
+      this.init();
     }
 
     init() {
