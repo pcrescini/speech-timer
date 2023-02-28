@@ -339,7 +339,6 @@ window.addEventListener('load', function() {
       this.game.enemies.forEach(enemy => {
         if (this.game.checkCollision(this, enemy)[0]) {
           this.markedForDeletion = true;
-          this.game.markedForDeletion();
           this.game.removeGameObjects();
           this.game.lostHatchlings++;
         }
@@ -436,6 +435,15 @@ window.addEventListener('load', function() {
       } else {
         this.eggTimer += deltaTime;
       }
+
+      //draw status text
+      context.save();
+      context.textAlign = 'left';
+      context.fillText('Score: ' + this.score, 25, 50);
+      if (this.debug) {
+        context.fillText('Lost Hatchlings: ' + this.lostHatchlings, 25, 100);
+      }
+      context.restore();
     }
 
     addEgg() {
