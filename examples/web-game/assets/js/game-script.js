@@ -22,7 +22,7 @@ window.addEventListener('load', function() {
       this.speedY = 0;
       this.distanceX = 0;
       this.distanceY = 0;
-      this.speedModifier = 5;
+      this.speedModifier = 8;
       this.image = document.querySelector("#bull");
       this.spriteWidth = 255; //width of sprite sheet divided by num columns
       this.spriteHeight = 256; //width of sprite sheet divided by num rows
@@ -159,9 +159,7 @@ window.addEventListener('load', function() {
       }
     }
 
-    update() {
-
-    }
+    update() {}
   }
 
   class Egg {
@@ -232,7 +230,7 @@ window.addEventListener('load', function() {
     constructor(game) {
       this.game = game;
       this.collisionRadius = 30;
-      this.speedX = Math.random() * 5 + 0.5;
+      this.speedX = Math.random() * 2 + 0.5;
       this.image = document.querySelector("#toad");
       this.spriteWidth = 140;
       this.spriteHeight = 260;
@@ -386,7 +384,6 @@ window.addEventListener('load', function() {
       context.stroke();
       context.restore();
     }
-
   }
 
   class Firefly extends Particle {
@@ -426,7 +423,7 @@ window.addEventListener('load', function() {
       this.width = this.canvas.width;
       this.height = this.canvas.height;
       this.topMargin = 260;
-      this.debug = true;
+      this.debug = false;
       this.player = new Player(this);
       this.fps = 70;
       this.timer = 0;
@@ -444,9 +441,11 @@ window.addEventListener('load', function() {
       this.particles = [];
       this.gameObjects = [];
       this.score = 0;
-      this.winningScore = 5;
+      this.winningScore = 25;
+      this.startGame = false;
       this.gameOver = false;
       this.lostHatchlings = 0;
+      this.maxHatchlingsLost = 10;
       this.mouse = {
         x: this.width * 0.5,
         y: this.height * 0.5,
@@ -475,87 +474,121 @@ window.addEventListener('load', function() {
       });
 
       window.addEventListener('keydown', e => {
+        console.log(e.key);
+        //starts game
+        if (e.key === 'Enter') {
+          this.start();
+        }
         //enables debug mode
-        if (e.key === "d") {
+        if (e.key === 'd') {
           this.debug = !this.debug;
         }
         //restarts game
-        if (e.key === "r") {
+        if (e.key === 'r') {
           this.restart();
         }
       });
+    }
 
-
+    start() {
+      this.startGame = true;
+      this.restart();
     }
 
     render(context, deltaTime) {
-      if (this.timer > this.interval) {
-        context.clearRect(0, 0, this.width, this.height); //clears canvas from (0,0) coordinate to (canvas width, canvas height) coordinate
-
-        //create game objects array
-        this.gameObjects = [this.player, ...this.eggs, ...this.obstacles, ...this.enemies, ...this.hatchlings, ...this.particles];
-
-        //sort game objects by vertical position (objects with higher vertical positon will be drawn before objects with lower vertical position)
-        this.gameObjects.sort((a, b) => {
-          return a.collisionY - b.collisionY;
-        });
-
-        //draws all game objects - obstacles, eggs & player
-        this.gameObjects.forEach((object) => {
-          object.draw(context);
-          object.update(deltaTime);
-        });
-
-        this.timer = 0;
-      }
-
-      this.timer += deltaTime;
-
-      //add eggs periodically
-      if (this.eggTimer > this.eggInterval && this.eggs.length < this.maxEggs && !this.gameOver) {
-        this.addEgg();
-        this.eggTimer = 0;
-      } else {
-        this.eggTimer += deltaTime;
-      }
-
-      //draw status text
-      context.save();
-      context.textAlign = 'left';
-      context.fillText('Score: ' + this.score, 25, 50);
-      if (this.debug) {
-        context.fillText('Lost Hatchlings: ' + this.lostHatchlings, 25, 100);
-      }
-      context.restore();
-
-      //win - lose message
-      if (this.score >= this.winningScore) {
+      if (!this.startGame) {
         context.save();
-        context.fillStyle = 'rgba(0,0,0,0.5';
-        context.fillRect(0,0, this.width, this.height);
-        context.fillStyle = 'white';
-        context.textAlign = 'center';
+        context.fillStyle = "rgba(0,0,0,0.5";
+        context.fillRect(0, 0, this.width, this.height);
+        context.fillStyle = "white";
+        context.textAlign = "center";
         context.shadowOffsetX = 4;
         context.shadowOffsetY = 4;
-        context.shadowColor = 'black';
+        context.shadowColor = "black";
+        context.font = "130px Bangers";
+        context.fillText('Welcome to Bullseye!', this.width * 0.5, this.height * 0.5 - 30);
+        context.font = "40px Bangers";
+        context.fillText('Help the hatchlings escape to the forrest before they are eaten by the toads.', this.width * 0.5, this.height * 0.5 + 30);
+        context.fillText('Use your mouse to controll the Bull and push the toads away.', this.width * 0.5, this.height * 0.5 + 80)
+        context.fillText(`Press 'ENTER' on your keyboard to start playing...`, this.width * 0.5, this.height * 0.5 + 130);
+        context.restore();
+      } else {
+        if (this.timer > this.interval) {
+          context.clearRect(0, 0, this.width, this.height); //clears canvas from (0,0) coordinate to (canvas width, canvas height) coordinate
+
+          //create game objects array
+          this.gameObjects = [this.player, ...this.eggs, ...this.obstacles, ...this.enemies, ...this.hatchlings, ...this.particles];
+
+          //sort game objects by vertical position (objects with higher vertical positon will be drawn before objects with lower vertical position)
+          this.gameObjects.sort((a, b) => {
+            return a.collisionY - b.collisionY;
+          });
+
+          //draws all game objects - obstacles, eggs & player
+          this.gameObjects.forEach((object) => {
+            object.draw(context);
+            object.update(deltaTime);
+          });
+          this.timer = 0;
+        }
+
+        this.timer += deltaTime;
+
+        //add eggs periodically
+        if (this.eggTimer > this.eggInterval && this.eggs.length < this.maxEggs && !this.gameOver) {
+          this.addEgg();
+          this.eggTimer = 0;
+        } else {
+          this.eggTimer += deltaTime;
+        }
+
+        //draw status text
+        context.save();
+        context.textAlign = 'left';
+        context.fillText('Score: ' + this.score, 25, 50);
+        context.fillText('Hatchlings Lost: ' + this.lostHatchlings, 25, 100);
+        context.restore();
+
+        //win - lose message
         let message1;
         let message2;
-        if (this.lostHatchlings <= 5) {
-          //win
+        if (this.score >= this.winningScore) {
+          context.save();
+          context.fillStyle = 'rgba(0,0,0,0.5';
+          context.fillRect(0,0, this.width, this.height);
+          context.fillStyle = 'white';
+          context.textAlign = 'center';
+          context.shadowOffsetX = 4;
+          context.shadowOffsetY = 4;
+          context.shadowColor = 'black';
           message1 = 'Bullseye!!!'
           message2 = 'You bullied the bullies and won the game!'
-        } else {
-          //lose
+          context.font = '130px Bangers';
+          context.fillText(message1, this.width * 0.5, this.height * 0.5 - 30);
+          context.font = '40px Bangers';
+          context.fillText(message2, this.width * 0.5, this.height * 0.5 + 30);
+          context.fillText(`Final Score: ${this.score}. Press 'R' to play again!`, this.width * 0.5, this.height * 0.5 + 80);
+          context.restore();
+          this.gameOver = true;
+        } else if (this.lostHatchlings >= this.maxHatchlingsLost) {
+          context.save();
+          context.fillStyle = 'rgba(0,0,0,0.5';
+          context.fillRect(0,0, this.width, this.height);
+          context.fillStyle = 'white';
+          context.textAlign = 'center';
+          context.shadowOffsetX = 4;
+          context.shadowOffsetY = 4;
+          context.shadowColor = 'black';
           message1 = 'Uh oh!!!';
-          message2 = `Sorry but you lost  ${this.lostHatchlings} hatchlings. Better luck next time!`
+          message2 = `Sorry but you lost ${this.lostHatchlings} hatchlings. Better luck next time!`
+          context.font = '130px Bangers';
+          context.fillText(message1, this.width * 0.5, this.height * 0.5 - 30);
+          context.font = '40px Bangers';
+          context.fillText(message2, this.width * 0.5, this.height * 0.5 + 30);
+          context.fillText(`Final Score: ${this.score}. Press 'R' to play again!`, this.width * 0.5, this.height * 0.5 + 80);
+          context.restore();
+          this.gameOver = true;
         }
-        context.font = '130px Bangers';
-        context.fillText(message1, this.width * 0.5, this.height * 0.5 - 30);
-        context.font = '40px Bangers';
-        context.fillText(message2, this.width * 0.5, this.height * 0.5 + 30);
-        context.fillText(`Final Score: ${this.score}. Press 'R' to butt heads again!`, this.width * 0.5, this.height * 0.5 + 80);
-        context.restore();
-        this.gameOver = true;
       }
     }
 
