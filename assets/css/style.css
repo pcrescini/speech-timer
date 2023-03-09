@@ -19,8 +19,10 @@ main {
 }
 
 footer {
+  position: fixed;
+  bottom: 0;
   color: #fff;
-  margin: 35px;
+  margin: 35px 0;
 }
 
 header h1 {
@@ -29,6 +31,10 @@ header h1 {
 
 header h2 {
   margin-top: 0px;
+}
+
+i {
+  font-style: normal;
 }
 
 .intro {
@@ -74,7 +80,7 @@ a.intro-link {
 }
 
 .callout {
-  margin: 4em auto;
+  margin: 2em auto;
   text-align: center;
   font-size: 6em;
 }
