@@ -1,82 +1,249 @@
-body {
-  margin: 5em;
-  font-family: "Open Sans", Helvetica, sans-serif;
-  font-size: 1rem;
-  color: #dfdfdf;
-  background-color: #343434;
+* {
+  box-sizing: border-box;
 }
 
+body {
+  margin: 0px;
+  width: 100%;
+  min-height: 100%;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-size: var(--font-size-lg);
+  line-height: 1.3;
+  color: var(--light);
+  background-color: var(--dark);
+}
+
+#overlay {
+  position: relative;
+  z-index: 0;
+}
+
+/* Header */
 header {
-  color: #dfdfdf;
+  color: var(--light);
+  background-color: var(--dark);
   font-family: "Open Sans", sans-serif;
   margin: auto;
+  padding: 25px;
+  height: 125px;
+  position: sticky;
+  top: 0px;
+  z-index: 10;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav a {
+  color: var(--light);
+  display: inline-block;
+  text-decoration: none;
+  text-decoration-skip-ink: auto;
+  position: relative;
+  transition: var(--transition);
+}
+
+nav a:not(.resume-link)::after {
+  content: "";
+  display: block;
+  width: 0px;
+  height: 1px;
+  position: relative;
+  bottom: 0;
+  background-color: var(--light);
+  transition: var(--transition);
+}
+
+nav a:hover {
+  color: var(--light);
+  outline: 0px;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.nav__links,
+.nav__links > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.nav__menu {
+  display: none;
+}
+
+.nav__menu button {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  border: 0px;
+  border-radius: 0px;
+  background-color: transparent;
+  color: var(--light);
+  font-size: 2rem;
+  z-index: 20;
+  transition-timing-function: linear;
+  transition-duration: 0.20s;
+  transition-property: opactity, filter;
+}
+
+.nav__menu--sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  width: min(50vw, 400px);
+  height: 100vh;
+  background-color: var(--dark);
+  box-shadow: -10px 0px 30px -15px var(--shadow);
+  z-index: 10;
+  transform: translateX(100vw);
+  transition: var(--transition);
+}
+
+.nav-open .nav__menu--sidebar {
+  transform: translateX(0);
+  transition: var(--transition);
+}
+
+.nav__menu--sidebar nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav__menu--sidebar ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.nav__menu--sidebar ul li {
+  margin-bottom: 35px;
+}
+
+.resume-link {
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--light);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.resume-link:hover {
+  background: rgba(256, 256, 256, 0.1);
+}
+
+.hamburger__menu__box {
+  display: inline-block;
+  position: relative;
+  width: 30px;
+  height: 24px;
+}
+
+.hamburger__menu__box--inner {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 30px;
+  height: 2px;
+  border-radius: 4px;
+  background-color: var(--light);
+  transition: var(--hamburger-transition);
+  transform: rotate(0deg);
+}
+
+.hamburger__menu__box--inner::before,
+.hamburger__menu__box--inner::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: auto;
+  right: 0px;
+  height: 2px;
+  border-radius: 4px;
+  background-color: var(--light);
+  transition-timing-function: ease;
+  transition-duration: 0.15s;
+  transition-property: transform;
+}
+
+.hamburger__menu__box--inner::before {
+  width: 120%;
+  top: -10px;
+  opacity: 1;
+  transition: var(--hamburger-transition-before);
+}
+
+.hamburger__menu__box--inner::after {
+  width: 80%;
+  bottom: -10px;
+  transform: rotate(0deg);
+  transition: var(--hamburger-transition-after);
+}
+
+.nav-open .hamburger__menu__box--inner {
+  transition: var(--hamburger-transition-active);
+  transform: rotate(225deg);
+}
+
+.nav-open .hamburger__menu__box--inner::before {
+  width: 100%;
+  top: 0px;
+  opacity: 0;
+  transition: var(--hamburger-transition-before-active);
+}
+
+.nav-open .hamburger__menu__box--inner::after {
+  width: 100%;
+  bottom: 0px;
+  transform: rotate(-90deg);
+  transition: var(--hamburger-transition-after-active);
+}
+
+
+.scroll {
+  box-shadow: 0 10px 30px -10px var(--shadow);
+}
+
+
+/* Main */
 main {
   margin: auto;
-  display: flex;
-  flex-wrap: wrap;
+  padding: 0 25px;
 }
 
-footer {
-  position: fixed;
-  bottom: 0;
-  color: #fff;
-  margin: 35px 0;
-}
 
-header h1 {
-  margin-bottom: 0px;
-}
-
-header h2 {
-  margin-top: 0px;
+/* Utility */
+*[id]:before {
+  display: block;
+  content: " ";
+  margin-top: -130px;
+  height: 130px;
+  visibility: hidden;
 }
 
 i {
   font-style: normal;
 }
 
-.intro {
-  color: #fff;
-  font-size: 36px;
-  text-align: left;
-}
-
-.article {
-  width: 30%;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-.button {
-  margin: 0 auto;
-  padding: 25px;
-  text-align: center;
-  background-color: #fff;
-}
-
-.logo {
-  background-image: url("/assets/img/lets-eat-htx-logo.png");
-  height: 150px;
-  width: 150px;
-  background-position: left;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-a,
-a:visited {
-  color: #002d62;
-}
-
-a:hover {
-  color: #eb6e1f;
-}
-
-a.intro-link {
-  color: #fff;
-  text-decoration: none;
+.blur {
+  filter: blur(5px);
 }
 
 .callout {
@@ -85,51 +252,37 @@ a.intro-link {
   font-size: 6em;
 }
 
+/* Footer */
+footer {
+  color: #fff;
+  margin: 35px 25px;
+}
+
 .contact-social {
   display: flex;
   align-items: center;
   gap: 25px;
 }
+
 .contact-social a {
   color: #fff;
   text-decoration: none;
   font-size: 22px;
 }
 
+/* Media Queries */
 @media screen and (max-width: 1024px) and (min-width: 768px) {
   .article {
     width: 45%;
   }
-
-  body {
-    background-color: #343434;
-  }
 }
 
 @media screen and (max-width: 767px) {
-  .article {
-    width: 100%;
+  .nav__menu {
+    display: block;
   }
 
-  .logo {
-    margin: 0 auto;
-    width: 200px;
-    height: 200px;
-  }
-
-  body {
-    background-color: #343434;
-  }
-
-  .callout {
-    font-size: 4em;
-  }
-
-  header h1 {
-    font-size: 2em;
-  }
-
-  header h2 {
-    font-size: 1em;
+  .nav__links {
+    display: none;
   }
 }
