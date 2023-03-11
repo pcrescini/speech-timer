@@ -24,7 +24,7 @@ header {
   background-color: var(--dark);
   font-family: "Open Sans", sans-serif;
   margin: auto;
-  padding: 25px;
+  padding: 25px 50px;
   height: 125px;
   position: sticky;
   top: 0px;
@@ -50,7 +50,7 @@ nav a {
   transition: var(--transition);
 }
 
-nav a:not(.resume-link)::after {
+nav a:not(.nav__log a, .resume-link)::after {
   content: "";
   display: block;
   width: 0px;
@@ -225,16 +225,42 @@ nav a:hover::after {
 /* Main */
 main {
   margin: auto;
-  padding: 0 25px;
+  padding: 0 50px;
 }
 
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100vh;
+  min-height: 100vh;
+}
+
+/* Footer */
+footer {
+  color: #fff;
+  padding: 35px 50px;
+}
+
+.contact-social {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.contact-social a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 22px;
+}
 
 /* Utility */
 *[id]:before {
   display: block;
   content: " ";
-  margin-top: -130px;
-  height: 130px;
+  margin-top: -150px;
+  height: 50px;
   visibility: hidden;
 }
 
@@ -250,24 +276,6 @@ i {
   margin: 2em auto;
   text-align: center;
   font-size: 6em;
-}
-
-/* Footer */
-footer {
-  color: #fff;
-  margin: 35px 25px;
-}
-
-.contact-social {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
-.contact-social a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 22px;
 }
 
 /* Media Queries */

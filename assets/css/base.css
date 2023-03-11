@@ -53,6 +53,7 @@ h5,
 h6,
 .h6 {
   font-weight: 400 !important;
+  margin: 0;
 }
 
 h1,
