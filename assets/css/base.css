@@ -2,6 +2,17 @@
   --font-size: 1rem;
   --light: #dfdfdf;
   --dark: #343434;
+  --platinum: #dfdfdf;
+  --jet: #343434;
+  --calypso: #396b97;
+  --hippie-blue: #6399ac;
+  --lapis-lazuli: #22577a;
+  --verdigris: #38a3a5;
+  --emerald: #57cc99;
+  --light-green: #80ed99;
+  --tea-green: #c7f9cc;
+  --spring-green: #01fb94;
+  --hunter-green: #33634c;
   --shadow: #111111;
   --font-size-xs: 0.85714rem;
   --font-size-sm: 0.875rem;
@@ -52,7 +63,7 @@ h5,
 .h5,
 h6,
 .h6 {
-  font-weight: 400 !important;
+  font-weight: 700 !important;
   margin: 0;
 }
 
@@ -134,11 +145,6 @@ iframe {
   max-width: 100%;
 }
 
-.width-control-100,
-.width-control-100 > select,
-.width-control-100 > input {
-  width: 100% !important;
-}
 
 .opacity-0 {
   opacity: 0 !important;
