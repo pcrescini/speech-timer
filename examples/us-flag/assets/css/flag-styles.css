@@ -1,0 +1,79 @@
+:root {
+  --flag-height: 263px;
+  --flag-width: 500px;
+  --old-glory-blue: #002147;
+  --old-glory-red: #bb133e;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0 auto;
+  padding: 50px;
+  font-family: "Montserrat", "Open Sans", Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  padding: 50px 0;
+}
+
+.flag {
+  width: var(--flag-width);
+  height: var(--flag-height);
+  position: relative;
+  box-shadow: 5px 5px 15px 8px rgba(0, 0, 0, 0.5);
+}
+
+.flag__stars {
+  background-color: var(--old-glory-blue);
+  width: calc(var(--flag-width) * 2 / 5);
+  height: calc(var(--flag-height) * 7 / 13);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.flag__stars__row {
+  display: flex;
+  align-items: center;
+}
+
+.flag__stars__row:nth-child(odd) {
+  justify-content: space-around;
+}
+
+.flag__stars__row:nth-child(even) {
+  justify-content: space-evenly;
+}
+
+.flag__stripes {
+  width: 100%;
+  height: 100%;
+}
+
+.flag__stripes--stripe {
+  height: calc(var(--flag-height) / 13);
+}
+
+.flag__stripes--stripe:nth-child(odd) {
+  background-color: var(--old-glory-red);
+}
+
+.flag__stripes--stripes:nth-child(even) {
+  background-color: var(--white);
+}
+
+.flag__stripes--stripes--red {
+  background-color: var(--old-glory-red);
+}
+
+.flag__stripes--stripes--white {
+  background-color: var(--white);
+}
+
+.star {
+  color: #ffffff;
+  display: block;
+  max-height: calc(var(--flag-height) * 7 / 13 * 0.1);
+}
