@@ -30,7 +30,15 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       ticking = true;
     }
+
+    AOS.init();
   });
+
+  const footerCopyright = document.querySelector('#copyright');
+  const dateObj = new Date();
+  const currentYear = dateObj.getFullYear();
+
+  footerCopyright.innerHTML = `&copy; ${currentYear} Paul C Crescini`;
 });
 
 function checkScrollPosition(scrollPosition) {

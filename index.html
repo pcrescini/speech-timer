@@ -14,12 +14,13 @@
   <link rel="stylesheet" href="./assets/css/base.css" />
   <link rel="stylesheet" href="./assets/css/regular.min.css" />
   <link rel="stylesheet" href="./assets/css/brands.min.css" />
+  <link rel="stylesheet" href="./assets/css/aos.css" />
 </head>
 
 <body>
   <header>
     <nav>
-      <div class="nav__logo"><a href="/"><img src="./assets/img/logo.png" alt="PCC" width="75" height="75"></a></div>
+      <div class="nav__logo"><a href="/"><img src="./assets/img/logo.png" alt="PCC"></a></div>
       <div class="nav__links">
         <ul>
           <li><a href="#about">About</a></li>
@@ -28,7 +29,6 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
         <a class="resume-link" href="./assets/files/paul-c-crescini-resume.pdf" target="_blank">Resume</a>
-
       </div>
       <div class="nav__menu">
         <button type="button" aria-label="Menu" class="nav__menu--button">
@@ -52,53 +52,86 @@
   </header>
   <div id="overlay">
     <main>
-      <section id="hero">
-        <p>Welcome! My name is</p>
-        <h1>Paul C Crescini.</h1>
-        <h2>I like building things for the web.</h2>
-        <p>I'm a front-end devloper who specializes in web implementation.</p>
+      <section id="hero" class="color--federal-blue">
+        <div class="container">
+          <div class="container__content">
+            <h4>Welcome! My name is</h4>
+            <h1 class="color--celestial-blue">Paul C Crescini.</h1>
+            <h2 class="color--federal-blue">I enjoy building things for the web.</h2>
+            <p>I'm a front-end devloper specializing in creating delightful user experiences using HTML, CSS, and vanilla JavaScript. I'm currently focussed on leveling up my React and Next.js skills and am always seeking new challenges and opportunities to enhance my skills and expertise.</p>
+          </div>
+          <div class="pentagon"></div>
+        </div>
       </section>
       <section id="about">
         <h2>About</h2>
-        <p>Hello and welcome! My name is Paul and I like building things for the web. </p>
-        <p>My love for building websites began in the late 90s when I received a newsleter from my dial up ISP with an article on how to create a website using HTML and CSS. Fast-forward to today, and I have had the honor of working in the technology and digital marketing field for the past 15 years within the ecommerce and finance industries.</p>
-        <p>I am passionate about solving complex designs, fixing customer pain points, and creating delightful user experiences.</p>
-        <p>Here are a few technologies that I work with:</p>
+        <div class="container">
+          <div class="container__content" data-aos="fade-right" data-aos-duration="1000">
+
+            <p>Hello and welcome! My name is Paul and I enjoy building things for the web. </p>
+            <p>My love for building websites began in the late 90s when I received a newsleter from my dial up ISP with an article on how to create a website using HTML and CSS.</p>
+            <p>Fast-forward to today, and I have had the honor of working with a diverse range of clients and collaborating with cross-functional teams to develop and maintain web applications, mobile apps, and responsive websites.</p>
+            <p>I am passionate about creating intuitive and engaging user experiences that seamlessly integrate design and functionality. I am committed to staying up-to-date with the latest web development trends and technologies and excited to put that knowledge into practice.</p>
+          </div>
+          <div class="container__content txt-center" data-aos="fade-left" data-aos-duration="1000">
+            <img class="fluid round-corners" src="./assets/img/computer-graphic.jpg" alt="Web development" width="600" height="524">
+          </div>
+        </div>
       </section>
       <section id="experience">
         <h2>Experience</h2>
+        <div class="colorize--white pentagon"></div>
       </section>
       <section id="projects">
-        <h2>Projects</h2>
+        <h2>Personal Projects</h2>
+        <div class="container">
+          <div class="container__content"></div>
+          <div class="container__content"></div>
+        </div>
+        <div class="container">
+          <div class="container__content"></div>
+          <div class="container__content"></div>
+        </div>
+
+
+
       </section>
       <section id="contact">
-        <h2>Contact</h2>
+        <h2>Contact Me</h2>
+        <div class="container">
+          <div class="container__content">
+
+            <div class="contact-social">
+              <div class="contact-social__linkedin">
+                <a href="https://www.linkedin.com/in/paulccrescini/" target="_blank"><i
+                    class="fa-brands fa-linkedin"></i></a>
+              </div>
+              <div class="contact-social__twitter">
+                <a href="https://twitter.com/paulccrescini" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+              </div>
+              <div class="contact-social__instagram">
+                <a href="https://www.instagram.com/pullbcarepull/" target="_blank"><i
+                    class="fa-brands fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-email"></div>
+
       </section>
     </main>
 
     <footer>
-      <div class="contact">
-        <h3>Contact Info</h3>
-        <div class="contact-email"></div>
-        <div class="contact-social">
-          <div class="contact-social__linkedin">
-            <a href="https://www.linkedin.com/in/paulccrescini/" target="_blank"><i
-                class="fa-brands fa-linkedin"></i></a>
-          </div>
-          <div class="contact-social__twitter">
-            <a href="https://twitter.com/paulccrescini" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-          </div>
-          <div class="contact-social__instagram">
-            <a href="https://www.instagram.com/pullbcarepull/" target="_blank"><i
-                class="fa-brands fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
+      <span id="copyright"></span>
+      Credit: <a
+        href="https://www.freepik.com/free-vector/responsive-design-isometric-landing-user-interface_20836284.htm#query=website%20graphics&position=40&from_view=keyword&track=ais">Image
+        by upklyak on Freepik</a>
     </footer>
     <button class="scrolltop" type="button" onclick="scrollToTop()" style="display: block"><i
         class="far fa-angle-up"></i><span class="d-none">scroll to top</span></button>
   </div>
   <script src="./assets/js/index.js" defer></script>
+  <script src="./assets/js/aos.js" defer></script>
 </body>
 
 </html>
