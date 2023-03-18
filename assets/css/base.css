@@ -146,6 +146,43 @@ iframe {
   max-width: 100%;
 }
 
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.gap-0 {
+  gap: 0px;
+}
+
+.gap-15 {
+  gap: 15px;
+}
+
+.pad-24 {
+  padding: 24px;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.txt-right {
+  text-align: right;
+}
+
+.d-none {
+  display: none;
+}
+
+.fluid-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.round-corners {
+  border-radius: 25px;
+}
+
 .opacity--0 {
   opacity: 0 !important;
 }

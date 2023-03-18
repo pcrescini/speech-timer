@@ -34,11 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
     AOS.init();
   });
 
-  const footerCopyright = document.querySelector('#copyright');
+  const footerCopyright = document.querySelector('#copyright-year');
   const dateObj = new Date();
   const currentYear = dateObj.getFullYear();
 
-  footerCopyright.innerHTML = `&copy; ${currentYear} Paul C Crescini`;
+  footerCopyright.innerHTML = `${currentYear}`;
 });
 
 function checkScrollPosition(scrollPosition) {
