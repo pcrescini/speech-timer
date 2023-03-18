@@ -158,6 +158,10 @@ iframe {
   gap: 15px;
 }
 
+.mb-15 {
+  margin-bottom: 15px;
+}
+
 .pad-24 {
   padding: 24px;
 }
