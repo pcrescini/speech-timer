@@ -1,7 +1,7 @@
-# pcrescini.github.io
+![Paul C Crescini Logo](assets/img/logo.png)
 
-This repo contains mini projects that were developed for practice purposes and to keey my front-end web development skills in check
+#paulcrescini.dev - v1
+---
+This repo contains the first iteration of [paulcrescini.dev](https://paulcrescini.dev) —  an online portfolio showcasing my professional front-end development work along with personal mini projects.
 
-As it currently stands, the majority of these projects are built using HTML, CSS, & vanilla JS.
-
-- pcc
+This site is built using HTML, CSS, and vanilla JavaScript.
