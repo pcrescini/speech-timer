@@ -1,7 +1,7 @@
-![Paul C Crescini Logo](assets/img/logo.png)
-
-#paulcrescini.dev - v1
+# Speech Timer
 ---
-This repo contains the first iteration of [paulcrescini.dev](https://paulcrescini.dev) —  an online portfolio showcasing my professional front-end development work along with personal mini projects.
+**Speech Timer** is a web-based timing tool that caters to the speech timing formats used by [Toastmasters International](https://www.toastmasters.org/)
 
-This site is built using HTML, CSS, and vanilla JavaScript.
+This tool is built using HTML, CSS, and vanilla JavaScript.
+
+Live site: [Speech Timer](https://paulcrescini.dev/examples/timer/)
