@@ -42,15 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function checkScrollPosition(scrollPosition) {
-  const headerHeight = document.querySelector("header").offsetHeight;
-  console.log("header height " + headerHeight);
-  console.log(scrollPosition);
-
-  if (scrollPosition < headerHeight / 3) {
-    document.querySelector("header").classList.remove("scroll");
+  if (scrollPosition <= 0) {
+    document.querySelector("header").classList.remove("scrolled");
     document.querySelector(".scrolltop").classList.remove("reveal");
   } else {
-    document.querySelector("header").classList.add("scroll");
+    document.querySelector("header").classList.add("scrolled");
     document.querySelector(".scrolltop").classList.add("reveal");
   }
 }

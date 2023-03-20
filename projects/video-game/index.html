@@ -2,19 +2,21 @@
 <html>
 
 <head>
-  <title>Bullseye! JS Video Game | Paul C Crescini, Front-end Web Developer</title>
+  <title>Bullseye! JS Video Game — Paul C Crescini | Front-end Web Developer</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="../../favicon.ico">
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&family=Roboto&display=swap" />
-  <link rel="stylesheet" href="../../assets/css/style.css" />
-  <link rel="stylesheet" href="../../assets/css/base.css" />
-  <link rel="stylesheet" href="../../assets/css/regular.min.css" />
-  <link rel="stylesheet" href="../../assets/css/brands.min.css" />
-  <link rel="stylesheet" href="../../assets/css/aos.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/regular.min.css">
+  <link rel="stylesheet" href="../../assets/css/brands.min.css">
+  <link rel="stylesheet" href="../../assets/css/aos.css">
 </head>
 
 <body>
@@ -50,18 +52,43 @@
   </header>
   <div id="overlay">
     <main>
-      <section id="projects">
-        <h1>Projects</h1>
-        <h2>Vulcan</h2>
-        <div class="projects__grid">
-          <div class="projects__grid--item" data-aos="fade-up-left" data-aos-duration="1000"><img class="fluid-img"
-              src="../../assets/img/projects_js-game-min.jpg" alt="JavaScript Game" width="800" height="633">
-            <div class="pad-24">
-              <h4>Bullseye! JavaScript Game</h4>
-              <p class="tag">personal project</p>
-              <p>Bullseye! is 2D game created using vanilla JavaScript, HTML5, CSS3, and HTML Canvas.</p>
-              <p><a href="./projects/video-game">Learn more →</a></p>
-            </div>
+      <section id="projectPage">
+        <h6 class="mb-15"><a href="../../#projects">&leftarrow; Back to Projects</a></h6>
+        <h1 class="h2">Bullseye! - JS Video Game</h1>
+        <div class="container">
+          <div class="container__content">
+            <p>Bullseye! is an animated physics game created using vanilla JavaScript, HTML, CSS, and HTML Canvas.</p>
+            <p>Prior to this project, I've never worked with the HTML Canvas element. So when I
+              saw that <a href="https://www.freecodecamp.org/news/create-an-animated-physics-game-with-javascript/"
+                target="_blank" rel="noreferrer nofollow">freeCodeCamp</a> came out with a free course that uses
+              the HTML Canvas to animate a simple game, I jumped at the chance to learn more while exercising my JavaScript skills.</p>
+            <p>In this course, I learned how to: </p>
+            <ul>
+              <li>implement a very simple AI to make the creatures feel alive</li>
+              <li>control the game's FPS and how to measure time to trigger periodic events</li>
+              <li>apply collision detection, resolve collisions and use that to simulate physics</li>
+              <li>use the built-in drawImage method to draw randomized game environments and animated characters
+                from a sprite sheet</li>
+              <li>capture mouse position and animate an 8 directional sprite sheet based on the relative position
+                between the mouse and the player character</li>
+            </ul>
+            <p>Future enchancements for this project include:</p>
+            <ul>
+              <li>refactoring the code to make the game mobile responsive</li>
+              <li>adding in music and sound effects</li>
+              <li>implementing difficulty settings</li>
+              <li>adding in a high score scoreboard</li>
+            </ul>
+          </div>
+          <div class="container__content txt-center">
+            <a class="image-link mb-15" href="../../examples/web-game/" target="_blank" rel="noreferrer nofollow"><img
+                class="fluid-img round-corners" src="../../assets/img/js-web-game.png" alt="Bullseye! - JS Video Game"
+                width="1060" height="635"></a> <br>
+            <a href="../../examples/web-game/" target="_blank" rel="noreferrer nofollow">View
+              their website
+              &rightarrow;</a> <br>
+            <a href="https://github.com/pcrescini/pcrescini.github.io/tree/main/examples/web-game" target="_blank"
+              rel="noreferrer nofollow">View the code &rightarrow;</a>
           </div>
         </div>
       </section>

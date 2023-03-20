@@ -2,7 +2,7 @@
   --font-size: 1rem;
   --light: #f1f1f1;
   --dark: #343434;
-  --platinum: #dfdfdf;
+  --platinum: #d1d1d1;
   --jet: #343434;
   --robin-egg-blue: #38d8e3;
   --celestial-blue: #3b98d1;
@@ -144,6 +144,10 @@ h6,
 
 iframe {
   max-width: 100%;
+}
+
+.flex-align-start  {
+  align-items: flex-start;
 }
 
 .flex-direction-column {
