@@ -16,66 +16,73 @@
 </head>
 
 <body>
+  <a id="skipNav" class="skip-nav" href="#mainContent">Skip to main content</a>
   <header>
     <h1>Speech Timer</h1>
   </header>
-  <main>
+  <main id="mainContent">
     <aside class="timer-menu">
-      <section class="timer-menu__options">
-        <label>
-          <input type="radio" id="iceBreaker" name="timerOptions" checked tabindex="0" />
+      <section class="timer-menu__options" role="radiogroup">
+        <label for="iceBreaker">
+          <input type="radio" id="iceBreaker" name="timerOptions" value="iceBreaker" tabindex="0" checked />
           Ice Breaker <span class="info">(4 - 6 minutes)</span>
         </label>
-        <label>
-          <input type="radio" id="regularSpeech" name="timerOptions" />
+
+        <label for="regularSpeech">
+          <input type="radio" id="regularSpeech" name="timerOptions" value="regularSpeech" tabindex="-1" />
           Regular Speech <span class="info">(5 - 7 minutes)</span>
         </label>
-        <label>
-          <input type="radio" id="longSpeech" name="timerOptions" />
+
+        <label for="longSpeech">
+          <input type="radio" id="longSpeech" name="timerOptions" value="longSpeech" tabindex="-1" />
           Long Speech <span class="info">(10 - 12 minutes)</span>
         </label>
-        <label>
-          <input type="radio" id="tableTopics" name="timerOptions" />
-          Table Topics <span class="info">(1 - 2 minutes)</span>
+
+        <label for="tableTopics">
+          <input type="radio" id="tableTopics" name="timerOptions" value="tableTopics" tabindex="-1" />
+          Table Topics
+          <span class="info">(1 - 2 minutes)</span>
         </label>
-        <label>
-          <input type="radio" id="evaluationSpeech" name="timerOptions" />
+
+        <label for="evaluationSpeech">
+          <input type="radio" id="evaluationSpeech" name="timerOptions" value="evaluationSpeech" tabindex="-1" />
           Evaluation <span class="info">(3 - 5 minutes)</span>
         </label>
-        <label>
-          <input type="radio" id="customSpeech" name="timerOptions" />
+
+        <label for="customSpeech">
+          <input type="radio" id="customSpeech" name="timerOptions" value="customSpeech" tabindex="-1" />
           Custom Time
         </label>
       </section>
-      <section class="timer-menu__times">
-        <label>
+
+      <section class="timer-menu__times" role="group">
+        <label for="greenLightTime">
           Green light:
           <input type="text" id="greenLightTime" placeholder="mm:ss" value="4:00" class="valid" />
           <span class="tooltip">Format: <code>mm:ss</code></span>
         </label>
-        <label>
+        <label for="yellowLightTime">
           Yellow light:
           <input type="text" id="yellowLightTime" placeholder="mm:ss" value="5:00" class="valid" />
           <span class="tooltip">Format: <code>mm:ss</code></span>
         </label>
-        <label>
+        <label for="redLightTime">
           Red light:
           <input type="text" id="redLightTime" placeholder="mm:ss" value="6:00" class="valid" />
           <span class="tooltip">Format: <code>mm:ss</code></span>
         </label>
-        <label>
+        <label for="disqualificationTime">
           Disqualification:
           <input type="text" id="disqualificationTime" placeholder="mm:ss" value="6:30" class="valid" />
           <span class="tooltip">Format: <code>mm:ss</code></span>
         </label>
       </section>
-      <section class="timer-menu__settings">
-        <label>
-          <input type="checkbox" id="showClock" checked />
-          Show clock
-        </label>
+
+      <section class="timer-menu__settings" role="group">
+        <label for="showClock">Show clock<input type="checkbox" id="showClock" checked tabindex="0" /></label>
       </section>
-      <section class="timer-menu__controls">
+
+      <section class="timer-menu__controls" role="group">
         <button id="controlButton">Start</button>
         <button id="resetButton">Reset</button>
       </section>

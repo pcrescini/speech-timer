@@ -1,9 +1,10 @@
 body {
-  font-family: "Open Sans", Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100%;
+  font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: var(--font-size-lg);
   color: var(--light);
   background-color: var(--dark);
-  margin: 2rem 2rem 0;
 }
 
 button {
@@ -11,21 +12,17 @@ button {
 }
 
 header {
-  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1em;
-}
-
-header h1 {
-  margin-bottom: 1em;
+  padding: 25px;
 }
 
 main {
   display: flex;
   align-items: center;
   transition: background-color 0.3s linear;
+  padding: 0 50px;
 }
 
 aside {
@@ -33,7 +30,22 @@ aside {
   transform: translateX(0);
   transition: transform 0.3s ease-in-out;
   flex: 1;
-  min-width: 300px;
+  min-width: 335px;
+}
+
+.skip-nav {
+  position: absolute;
+  left: 45%;
+  transform: translateY(-100%);
+  background-color: var(--celestial-blue);
+  color: var(--light);
+  padding: 10px;
+  transition: var(--transition);
+  z-index: 500;
+}
+
+.skip-nav:focus {
+  transform: translateY(0%);
 }
 
 .timer-menu__options,
@@ -45,6 +57,14 @@ aside {
   margin: 1em 0;
   border-radius: 15px;
   box-shadow: 0 0 2em rgb(0 0 0 / 20%);
+}
+
+.timer-menu__options input:focus,
+.timer-menu__options input:focus-visible,
+.timer-menu__settings input:focus,
+.timer-menu__settings input:focus-visible {
+  outline: 2px dotted black;
+  outline-offset: 5px;
 }
 
 .timer-menu__options label:first-child,
@@ -129,11 +149,11 @@ aside {
 }
 
 .timer-menu__times input.valid:focus {
-  border-color: green;
+  border: 2px solid green;
 }
 
 .timer-menu__times input.invalid:focus {
-  border-color: red;
+  border: 2px solid red;
 }
 
 .timer-menu__times input:focus ~ .tooltip {
@@ -142,7 +162,7 @@ aside {
 }
 
 .timer-menu__controls button {
-  font-family: "Open Sans", Helvetica, sans-serif;
+  font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 1rem;
   display: block;
   width: 100%;
@@ -184,7 +204,7 @@ aside {
 }
 
 .tooltip::before {
-  content: "";
+  content: '';
   display: block;
   width: 0;
   height: 0;
@@ -196,11 +216,7 @@ aside {
   top: 18px;
 }
 
-header h1 {
-  margin-bottom: 0px;
-}
-
-@media (max-width: 769px) {
+@media (max-width: 991px) {
   main {
     flex-direction: column;
   }
@@ -208,5 +224,37 @@ header h1 {
   aside {
     width: 100%;
     order: 2;
+  }
+
+  .tooltip {
+    display: none;
+    background: var(--light);
+    position: absolute;
+    right: 85px;
+    margin-top: -0.2em;
+    border-radius: 15px;
+    min-width: 160px;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .tooltip::before {
+    content: '';
+    display: none;
+  }
+
+  .tooltip::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid var(--light);
+    right: -8px;
+    top: 18px;
+    transform: rotate(180deg);
   }
 }
